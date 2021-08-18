@@ -65,3 +65,16 @@ CREATE TABLE `case_study_v1`.`shopping_cart` (
     ALTER TABLE `case_study_v1`.`shopping_cart` 
 ADD COLUMN `quantity` INT NOT NULL AFTER `inventory_id`;
 
+//////////
+
+ALTER TABLE `case_study_v1`.`users_role` 
+CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ;
+
+//////////
+
+ALTER TABLE `case_study_v1`.`users` 
+ADD COLUMN `phone` VARCHAR(20) NOT NULL AFTER `zip`;
+
+/////////
+
+
