@@ -2,6 +2,10 @@ import React, {useState} from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./createUser.css";
+import axios from "axios";
+import CountrySelector from "../../reuseable/countrySelector";
+
+const baseURL = "http://localhost:8080/users"
 
 export default function CreateUser() {
     const [email, setEmail] = useState("");
@@ -17,16 +21,31 @@ export default function CreateUser() {
     const [phone, setPhone] = useState("");
 
     function validateForm() {
-        {/* TODO */}
-        return email.length > 0 && password.length > 0;
+
+        return email.length > 0 && password.length > 0 && firstName.length > 0 && lastName.length > 0 &&
+            address1.length > 0 && city.length > 0 && state.length > 0 && zip.length > 0 && country.length > 0 &&
+            phone.length > 0;
     }
 
-    function handleSubmit(event) {
-        event.preventDefault();
+    /* Callback method for Country Select*/
+    const successCallBackData = (data) => {
+        setCountry(data);
     }
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        const fullName = firstName + " " + lastName;
+        const user = {
+            email: email, password: password, fullName: fullName, address1: address1, address2: address2,
+            city: city, state: state, country: country, zip: zip, phone: phone}
+        axios.post(`${baseURL}`, user)
+            .then(response => console.log(response));
+    }
+
+
 
     return (
-        <div className="Login">
+        <div className="Create User">
             <Form onSubmit={handleSubmit}>
                 <Form.Group size="lg" controlId="email">
                     <Form.Label>Email</Form.Label>
@@ -95,11 +114,8 @@ export default function CreateUser() {
                 </Form.Group>
                 <Form.Group size="lg" controlId="country">
                     <Form.Label>Country</Form.Label>
-                    <Form.Control
-                        type="country"
-                        value={country}
-                        onChange={(e) => setCountry(e.target.value)}
-                    />
+                    <CountrySelector callBack={successCallBackData}/>
+
                 </Form.Group>
                 <Form.Group size="lg" controlId="zip">
                     <Form.Label>Zip</Form.Label>
