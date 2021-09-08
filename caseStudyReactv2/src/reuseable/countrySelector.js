@@ -6,11 +6,12 @@ const CountrySelector = (props) =>{
     const [country, setCountry] = useState('')
     const options = useMemo(() => countryList().getData(), [])
 
-    {/* Callback method used with parent class */}
+
     useEffect(() => {
         goBack();
     })
 
+    {/* Callback method used with parent class */}
     const goBack = () => {
         props.callBack(country);
     }

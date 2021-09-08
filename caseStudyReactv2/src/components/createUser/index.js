@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import "./createUser.css";
 import axios from "axios";
 import CountrySelector from "../../reuseable/countrySelector";
+import StateSelector from "../../reuseable/stateSelector";
 
 const baseURL = "http://localhost:8080/users"
 
@@ -28,8 +29,13 @@ export default function CreateUser() {
     }
 
     /* Callback method for Country Select*/
-    const successCallBackData = (data) => {
+    const countryCallBackData = (data) => {
         setCountry(data);
+    }
+
+    /* Callback method for State Select*/
+    const stateCallBackData = (data) => {
+        setState(data)
     }
 
     const handleSubmit = event => {
@@ -106,15 +112,12 @@ export default function CreateUser() {
                 </Form.Group>
                 <Form.Group size="lg" controlId="state">
                     <Form.Label>State</Form.Label>
-                    <Form.Control
-                        type="state"
-                        value={state}
-                        onChange={(e) => setState(e.target.value)}
-                    />
+                    <StateSelector callBack={stateCallBackData}/>
+
                 </Form.Group>
                 <Form.Group size="lg" controlId="country">
                     <Form.Label>Country</Form.Label>
-                    <CountrySelector callBack={successCallBackData}/>
+                    <CountrySelector callBack={countryCallBackData}/>
 
                 </Form.Group>
                 <Form.Group size="lg" controlId="zip">
