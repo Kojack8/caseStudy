@@ -248,7 +248,7 @@ const StateSelector = (props) =>{
         goBack();
     })
 
-    {/* Callback method used with parent class */}
+    /* Callback method used with parent class */
     const goBack = () => {
         props.callBack(usState);
     }

@@ -6,7 +6,7 @@ import axios from "axios";
 import CountrySelector from "../../reuseable/countrySelector";
 import StateSelector from "../../reuseable/stateSelector";
 
-const baseURL = "http://localhost:8080/users"
+const baseURL = "users"
 
 export default function CreateUser() {
     const [email, setEmail] = useState("");
@@ -46,7 +46,15 @@ export default function CreateUser() {
             city: city, state: state, country: country, zip: zip, phone: phone}
         axios.post(`${baseURL}`, user)
             .then(response => console.log(response));
-    }
+
+        axios(`${baseURL}`, user, {
+                method: 'POST',
+                headers: {
+                    Authorization: 'Basic ' + window.btoa('caseStudyUser:Hamster5Lobster9Lightbulb')
+                }
+            }
+        ).then((response) => {console.log(response.headers)});
+    };
 
 
 

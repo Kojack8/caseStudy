@@ -1,13 +1,19 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
-const baseURL = "http://localhost:8080/products"
+const baseURL = "products"
 
 export default function Inventory() {
     const [users, setUsers] = useState([] );
 
     useEffect(() => {
-        axios.get(`${baseURL}`).then((response) => {
+        axios(`${baseURL}`, {
+                method: 'GET',
+                headers: {
+                    Authorization: 'Basic ' + window.btoa('caseStudyUser:Hamster5Lobster9Lightbulb')
+                }
+            }
+        ).then((response) => {
             setUsers([response.data] );
         })
     }, [])
