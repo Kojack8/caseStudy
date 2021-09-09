@@ -27,7 +27,7 @@ export default function CreateUser() {
     function validateForm() {
 
         return email.length > 0 && password.length > 0 && firstName.length > 0 && lastName.length > 0 &&
-            address1.length > 0 && city.length > 0 && state.length > 0 && zip.length > 0 && country.length > 0 &&
+            address1.length > 0 && city.length > 0 && zip.length > 0 && country.length > 0 &&
             phone.length > 0;
     }
 

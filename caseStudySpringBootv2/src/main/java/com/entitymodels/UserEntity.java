@@ -113,7 +113,11 @@ public class UserEntity {
     }
 
     public void setAddress2(String address2) {
-        this.address2 = address2;
+        if (address2 == ""){
+            this.address2 = null;
+        } else {
+            this.address2 = address2;
+        }
     }
 
     public String getCity() {
@@ -129,7 +133,11 @@ public class UserEntity {
     }
 
     public void setState(String state) {
-        this.state = state;
+        if (state == "") {
+            this.state = null;
+        } else {
+            this.state = state;
+        }
     }
 
     public String getCountry() {

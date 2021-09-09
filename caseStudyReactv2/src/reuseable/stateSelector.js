@@ -7,6 +7,10 @@ const StateSelector = (props) =>{
     const [usState, setusState] = useState('')
     const options = [
         {
+            "label": "Not applicable",
+            "value": null
+        },
+        {
             "label": "Alabama",
             "value": "AL"
         },
