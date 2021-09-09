@@ -5,8 +5,11 @@ import "./createUser.css";
 import axios from "axios";
 import CountrySelector from "../../reuseable/countrySelector";
 import StateSelector from "../../reuseable/stateSelector";
+import Cookies from 'js-cookie';
+
 
 const baseURL = "users"
+const csrfToken=  Cookies.get('XSRF-TOKEN');
 
 export default function CreateUser() {
     const [email, setEmail] = useState("");
@@ -43,17 +46,18 @@ export default function CreateUser() {
         const fullName = firstName + " " + lastName;
         const user = {
             email: email, password: password, fullName: fullName, address1: address1, address2: address2,
-            city: city, state: state, country: country, zip: zip, phone: phone}
-        axios.post(`${baseURL}`, user)
-            .then(response => console.log(response));
+            city: city, state: state, country: country, zip: zip, phone: phone};
 
-        axios(`${baseURL}`, user, {
+        axios({
                 method: 'POST',
+                url: `${baseURL}`,
+                data: user,
                 headers: {
-                    Authorization: 'Basic ' + window.btoa('caseStudyUser:Hamster5Lobster9Lightbulb')
+                    Authorization: 'Basic ' + window.btoa('caseStudyUser:Hamster5Lobster9Lightbulb'),
+                    'X-XSRF-TOKEN': csrfToken
                 }
             }
-        ).then((response) => {console.log(response.headers)});
+        ).then((response) => {console.log(response)});
     };
 
 

@@ -1,6 +1,7 @@
 package com.entitymodels;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "user")
 public class UserEntity {
-    public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+    private static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +24,8 @@ public class UserEntity {
     @Column(name = "email", unique = true, nullable = false, length = 255)
     private String email;
 
-    @Column(name = "password", nullable = false, length = 45)
-    private @JsonIgnore String password;
-
+    @Column(name = "password", nullable = false, length = 60)
+    private String password;
 
     @Column(name = "address1", nullable = false, length = 50)
     private String address1;
@@ -55,7 +55,7 @@ public class UserEntity {
                       String city, String state, String country, String zip, String phone) {
         this.fullName = fullName;
         this.email = email;
-        this.setPassword(password);
+        setPassword(password);
         this.address1 = address1;
         this.address2 = address2;
         this.city = city;
@@ -69,7 +69,7 @@ public class UserEntity {
                       String zip, String phone) {
         this.fullName = fullName;
         this.email = email;
-        this.setPassword(password);
+        setPassword(password);
         this.address1 = address1;
         this.city = city;
         this.zip = zip;
@@ -156,10 +156,12 @@ public class UserEntity {
         this.phone = phone;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password){
         this.password = PASSWORD_ENCODER.encode(password);
     }

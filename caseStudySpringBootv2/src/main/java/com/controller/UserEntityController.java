@@ -32,6 +32,7 @@ public class UserEntityController {
 
     @PostMapping
     public ResponseEntity createUser(@RequestBody UserEntity user) throws URISyntaxException {
+        System.out.println(user);
         UserEntity savedUser = userRepository.save(user);
         return ResponseEntity.created(new URI("/userEntities/" + savedUser.getId())).body(savedUser);
     }
