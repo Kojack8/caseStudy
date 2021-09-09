@@ -22,7 +22,12 @@ public class UserEntityController {
 
     @GetMapping
     public List<UserEntity> getUsers(){
-        return userRepository.findAll();
+        try {
+            return userRepository.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @GetMapping("/{id}")
@@ -32,9 +37,13 @@ public class UserEntityController {
 
     @PostMapping
     public ResponseEntity createUser(@RequestBody UserEntity user) throws URISyntaxException {
-        System.out.println(user);
-        UserEntity savedUser = userRepository.save(user);
-        return ResponseEntity.created(new URI("/userEntities/" + savedUser.getId())).body(savedUser);
+        try {
+            UserEntity savedUser = userRepository.save(user);
+            return ResponseEntity.created(new URI("/userEntities/" + savedUser.getId())).body(savedUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @PutMapping("/{id}")
