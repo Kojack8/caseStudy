@@ -13,6 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "user")
 public class UserEntity {
+
     private static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
     @Id
@@ -177,6 +178,22 @@ public class UserEntity {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Set<PurchaseEntity> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(Set<PurchaseEntity> purchases) {
+        this.purchases = purchases;
+    }
+
+    public Collection<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<RoleEntity> roles) {
+        this.roles = roles;
     }
 
     @JsonIgnore

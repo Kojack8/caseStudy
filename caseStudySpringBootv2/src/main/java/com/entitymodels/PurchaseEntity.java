@@ -10,7 +10,7 @@ public class PurchaseEntity {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
-    
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     UserEntity user;

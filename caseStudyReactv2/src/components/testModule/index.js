@@ -17,7 +17,8 @@ export default function TestModule(){
                 }
             }
             ).then((response) => {
-            setUsers([response.data] );
+            setUsers([response.data] )
+
         })
     }, [])
 

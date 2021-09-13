@@ -57,7 +57,8 @@ export default function CreateUser() {
                     'X-XSRF-TOKEN': csrfToken
                 }
             }
-        ).then((response) => {console.log(response)});
+        ).then((response) => {console.log(response)})
+            .catch(err => console.log(err));
     };
 
 
