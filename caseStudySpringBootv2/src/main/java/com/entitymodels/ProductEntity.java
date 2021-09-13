@@ -2,6 +2,8 @@ package com.entitymodels;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -26,6 +28,9 @@ public class ProductEntity {
 
     @Column(name = "price", nullable = false)
     private Double price;
+
+    @OneToMany(mappedBy = "product")
+    Set<PurchaseEntity> purchases;
 
     public Long getId() {
         return id;
