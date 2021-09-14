@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -90,6 +91,11 @@ public class UserEntity {
         this.city = city;
         this.zip = zip;
         this.phone = phone;
+    }
+
+    public UserEntity(String name, boolean a, boolean b, boolean c, List<RoleEntity> roles){
+        this.fullName = name;
+        this.roles = roles;
     }
 
     public Long getId() {

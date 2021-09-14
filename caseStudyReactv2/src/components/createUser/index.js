@@ -41,6 +41,7 @@ export default function CreateUser() {
         setState(data)
     }
 
+
     const handleSubmit = event => {
         event.preventDefault();
         const fullName = firstName + " " + lastName;

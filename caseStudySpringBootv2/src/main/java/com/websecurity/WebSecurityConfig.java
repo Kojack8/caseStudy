@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpBasic();
         http.cors();
-        http.addFilterAfter(new CustomFilter(), BasicAuthenticationFilter.class);
+      
     }
 
     @Bean
@@ -48,13 +48,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return source;
     }
 
-    public class CustomFilter extends GenericFilterBean {
-        @Override
-        public void doFilter(ServletRequest request, ServletResponse response,
-                             FilterChain chain) throws IOException, ServletException {
-            HttpServletResponse resp = (HttpServletResponse) response;
-            resp.setHeader("Set-Cookie", "locale=de; HttpOnly; SameSite=strict");
-            chain.doFilter(request, response);
-        }
-    }
+
+
 }

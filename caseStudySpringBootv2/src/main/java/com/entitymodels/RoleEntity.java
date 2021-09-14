@@ -17,14 +17,15 @@ public class RoleEntity {
     @ManyToMany(mappedBy = "roles")
     private Collection<UserEntity> users;
 
-    @ManyToMany
-    @JoinTable(
-            name = "roles_privileges",
-            joinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id" ),
-                inverseJoinColumns = @JoinColumn(
-                    name = "privilege_id", referencedColumnName = "id"))
-        private Collection<PrivilegeEntity> privileges;
+
+
+    public RoleEntity(){
+
+    }
+
+    public RoleEntity(String name){
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -50,11 +51,5 @@ public class RoleEntity {
         this.users = users;
     }
 
-    public Collection<PrivilegeEntity> getPrivileges() {
-        return privileges;
-    }
 
-    public void setPrivileges(Collection<PrivilegeEntity> privileges) {
-        this.privileges = privileges;
-    }
 }
