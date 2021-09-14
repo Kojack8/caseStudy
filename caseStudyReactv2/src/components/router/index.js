@@ -12,7 +12,7 @@ export default class Router extends React.Component {
             <Switch>
                 <Route exact path='/' component={Home}/>
                 <Route exact path='/about' component={Inventory}/>
-                <Route exact path='/contact' component={Login}/>
+                <Route exact path='/login' component={Login}/>
                 <Route exact path='/signup' component={CreateUser}></Route>
 
             </Switch>
