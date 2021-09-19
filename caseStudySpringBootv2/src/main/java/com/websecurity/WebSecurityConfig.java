@@ -1,5 +1,6 @@
 package com.websecurity;
 
+import com.errorhandler.CustomAuthenticationFailureHandler;
 import com.userdetails.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -29,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 //.antMatchers("/users").authenticated() USE THIS TO PUT PAGES BEHIND LOG IN
-                .antMatchers("/login", "/users").permitAll()
+                .antMatchers("/login", "/users", "/products").permitAll()
                 //.and()
                 //.httpBasic()
                 .and()
@@ -37,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .usernameParameter("email")
                 .defaultSuccessUrl("/users")
-                .failureUrl("/login?error=true")
+                .failureHandler(authenticationFailureHandler())
                 // The following two lines breaks what you had working but at other times seems to be on the right track?
                 //.and()
                 //.exceptionHandling().authenticationEntryPoint(new RestAuthEntryPoint());
@@ -48,6 +50,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       
     }
 
+    @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {
+        return new CustomAuthenticationFailureHandler();
+    }
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {

@@ -12,11 +12,11 @@ export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    function validateForm() {
+    const validateForm = () => {
         return email.length > 0 && password.length > 0;
     }
 
-    function handleSubmit(event) {
+    const handleSubmit = (event) => {
         event.preventDefault();
         axios({
                 method: 'POST',
@@ -30,9 +30,17 @@ export default function Login() {
                     'X-XSRF-TOKEN': csrfToken
                 }
             }
-        ).then((response) => {console.log(response)})
+        ).then((response) => {
+            console.log(response)
+            if (response != null){
+                console.log(JSON.stringify(response))
+            }
+        })
             .catch(err => console.log(err));
     }
+
+
+
 
     return (
         <div className="Login">
