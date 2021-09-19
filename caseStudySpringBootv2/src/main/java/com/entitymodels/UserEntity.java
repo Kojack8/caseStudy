@@ -96,10 +96,6 @@ public class UserEntity {
         this.phone = phone;
     }
 
-    public UserEntity(String name, boolean a, boolean b, boolean c, List<RoleEntity> roles){
-        this.fullName = name;
-        this.roles = roles;
-    }
 
     public Long getId() {
         return id;
