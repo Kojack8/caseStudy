@@ -2,6 +2,11 @@ import React, {useState} from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
+import axios from "axios";
+import Cookies from "js-cookie";
+
+const baseURL = "login"
+const csrfToken=  Cookies.get('XSRF-TOKEN');
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -13,6 +18,20 @@ export default function Login() {
 
     function handleSubmit(event) {
         event.preventDefault();
+        axios({
+                method: 'POST',
+                url: `${baseURL}`,
+                params: {
+                  email: email,
+                  password: password
+                },
+                headers: {
+                    Authorization: 'Basic ' + window.btoa('caseStudyUser:Hamster5Lobster9Lightbulb'),
+                    'X-XSRF-TOKEN': csrfToken
+                }
+            }
+        ).then((response) => {console.log(response)})
+            .catch(err => console.log(err));
     }
 
     return (

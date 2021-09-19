@@ -1,6 +1,7 @@
 package com.entitymodels;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,7 +10,6 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -52,10 +52,13 @@ public class UserEntity {
     @Column(name = "phone", nullable = false, length = 20)
     private String phone;
 
-    @OneToMany(mappedBy = "user")
-    Set<PurchaseEntity> purchases;
 
-    @ManyToMany
+
+    private boolean enabled;
+
+    private boolean tokenExpired;
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(
@@ -186,13 +189,7 @@ public class UserEntity {
         this.phone = phone;
     }
 
-    public Set<PurchaseEntity> getPurchases() {
-        return purchases;
-    }
 
-    public void setPurchases(Set<PurchaseEntity> purchases) {
-        this.purchases = purchases;
-    }
 
     public Collection<RoleEntity> getRoles() {
         return roles;
@@ -210,6 +207,22 @@ public class UserEntity {
     @JsonProperty
     public void setPassword(String password){
         this.password = PASSWORD_ENCODER.encode(password);
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isTokenExpired() {
+        return tokenExpired;
+    }
+
+    public void setTokenExpired(boolean tokenExpired) {
+        this.tokenExpired = tokenExpired;
     }
 
     @Override

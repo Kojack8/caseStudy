@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => (
   <div className='app'>
-    <TestModule />
+      <TestModule />
     <h1>Video Production Rental Service</h1>
 
     <Navigation />
