@@ -11,6 +11,7 @@ const csrfToken=  Cookies.get('XSRF-TOKEN');
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(false);
 
     const validateForm = () => {
         return email.length > 0 && password.length > 0;
@@ -30,13 +31,12 @@ export default function Login() {
                     'X-XSRF-TOKEN': csrfToken
                 }
             }
-        ).then((response) => {
-            console.log(response)
-            if (response != null){
-                console.log(JSON.stringify(response))
-            }
+        ).then((response) => console.log(response))
+        .catch(err => {
+            console.log(err.message)
+            setError(true);
         })
-            .catch(err => console.log(err));
+
     }
 
 
@@ -45,6 +45,7 @@ export default function Login() {
     return (
         <div className="Login">
             <Form onSubmit={handleSubmit}>
+                {error ? <span className="form-error"> Invalid Credentials </span> : null}
                 <Form.Group size="lg" controlId="email">
                     <Form.Label>Email</Form.Label>
                     <Form.Control

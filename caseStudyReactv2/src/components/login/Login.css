@@ -25,4 +25,11 @@
     .form-label{
         padding-right: 5px;
     }
+
+
+}
+
+.form-error{
+    color: red;
+    margin: 0 auto;
 }
