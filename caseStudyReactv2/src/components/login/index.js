@@ -31,9 +31,12 @@ export default function Login() {
                     'X-XSRF-TOKEN': csrfToken
                 }
             }
-        ).then((response) => console.log(response))
+        ).then((response) => {
+            console.log(response)
+            setError(false);
+        })
         .catch(err => {
-            console.log(err.message)
+            console.log(err)
             setError(true);
         })
 
