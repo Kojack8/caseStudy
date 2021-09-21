@@ -3,6 +3,8 @@ package com.entitymodels;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.apache.catalina.User;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -18,11 +20,13 @@ public class RoleEntity {
     private String name;
 
     @JsonBackReference
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(mappedBy = "roles")
     private Collection<UserEntity> users;
 
 
     @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
             name = "roles_privileges",
             joinColumns = @JoinColumn(
