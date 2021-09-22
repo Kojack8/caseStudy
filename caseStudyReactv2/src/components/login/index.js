@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
@@ -8,10 +8,19 @@ import Cookies from "js-cookie";
 const baseURL = "login"
 const csrfToken=  Cookies.get('XSRF-TOKEN');
 
-export default function Login() {
+const Login = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
+    const [username, setUsername] = useState("");
+
+    useEffect(() => {
+        goBack();
+    })
+
+    const goBack = () => {
+        props.callBack(username);
+    }
 
     const validateForm = () => {
         return email.length > 0 && password.length > 0;
@@ -33,7 +42,18 @@ export default function Login() {
             }
         ).then((response) => {
             console.log(response)
-            setError(false);
+            setError(false)
+
+            axios({
+                method: 'GET',
+                url: "user/name",
+                headers: {
+                    Authorization: 'Basic ' + window.btoa('caseStudyUser:Hamster5Lobster9Lightbulb'),
+                    'X-XSRF-TOKEN': csrfToken
+                }
+            }).then((response) => {
+                setUsername(response.data);
+            }).catch(err => {console.log(err)});
         })
         .catch(err => {
             console.log(err)
@@ -73,3 +93,5 @@ export default function Login() {
         </div>
     );
 }
+
+export default Login;

@@ -3,7 +3,7 @@ import axios from "axios";
 
 const baseURL = "products"
 
-export default function Inventory() {
+const Inventory = () => {
     const [users, setUsers] = useState([] );
 
     useEffect(() => {
@@ -36,3 +36,5 @@ export default function Inventory() {
         </div>
     );
 }
+
+export default Inventory;
