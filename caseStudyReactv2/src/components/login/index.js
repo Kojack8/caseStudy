@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import "./Login.css";
 import axios from "axios";
 import Cookies from "js-cookie";
+import {Redirect, useHistory} from "react-router-dom";
 
 const baseURL = "login"
 const csrfToken=  Cookies.get('XSRF-TOKEN');
@@ -13,6 +14,7 @@ const Login = (props) => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
     const [username, setUsername] = useState("");
+    const history = useHistory();
 
     useEffect(() => {
         goBack();
@@ -41,7 +43,6 @@ const Login = (props) => {
                 }
             }
         ).then((response) => {
-            console.log(response)
             setError(false)
 
             axios({
@@ -52,11 +53,11 @@ const Login = (props) => {
                     'X-XSRF-TOKEN': csrfToken
                 }
             }).then((response) => {
-                setUsername(response.data);
+                setUsername(response.data)
+                history.push("/");
             }).catch(err => {console.log(err)});
         })
         .catch(err => {
-            console.log(err)
             setError(true);
         })
 

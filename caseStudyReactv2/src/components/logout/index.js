@@ -4,10 +4,12 @@ import Cookies from "js-cookie";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Logout.css"
+import {useHistory} from "react-router-dom";
 
 const csrfToken = Cookies.get('XSRF-TOKEN');
 
 const Logout = () => {
+    const history = useHistory();
 
     {/* TODO Make sure username is getting removed from App on logout*/}
 
@@ -20,6 +22,7 @@ const Logout = () => {
                 'X-XSRF-TOKEN': csrfToken
             }
         })
+        history.push("/login");
     };
 
     return (
