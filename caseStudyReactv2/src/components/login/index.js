@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import "./Login.css";
 import axios from "axios";
 import Cookies from "js-cookie";
-import {Redirect, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 const baseURL = "login"
 const csrfToken=  Cookies.get('XSRF-TOKEN');
@@ -38,7 +38,7 @@ const Login = (props) => {
                   password: password
                 },
                 headers: {
-                    Authorization: 'Basic ' + window.btoa('caseStudyUser:Hamster5Lobster9Lightbulb'),
+                    /*Authorization: 'Basic ' + window.btoa('caseStudyUser:Hamster5Lobster9Lightbulb'),*/
                     'X-XSRF-TOKEN': csrfToken
                 }
             }
@@ -49,7 +49,7 @@ const Login = (props) => {
                 method: 'GET',
                 url: "user/name",
                 headers: {
-                    Authorization: 'Basic ' + window.btoa('caseStudyUser:Hamster5Lobster9Lightbulb'),
+                    /*Authorization: 'Basic ' + window.btoa('caseStudyUser:Hamster5Lobster9Lightbulb'),*/
                     'X-XSRF-TOKEN': csrfToken
                 }
             }).then((response) => {

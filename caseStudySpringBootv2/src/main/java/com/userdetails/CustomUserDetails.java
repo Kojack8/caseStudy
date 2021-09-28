@@ -23,9 +23,9 @@ public class CustomUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<RoleEntity> roles = (List<RoleEntity>) user.getRoles();
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        for (RoleEntity role: roles) {
+        for (RoleEntity role : roles) {
             Collection<PrivilegeEntity> privileges = role.getPrivileges();
-            for (PrivilegeEntity privilege: privileges){
+            for (PrivilegeEntity privilege : privileges) {
                 authorities.add(new SimpleGrantedAuthority(privilege.getName()));
             }
         }

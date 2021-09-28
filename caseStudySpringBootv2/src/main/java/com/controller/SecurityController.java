@@ -27,6 +27,8 @@ public class SecurityController {
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             CustomUserDetails userPrincipal = (CustomUserDetails) authentication.getPrincipal();
             username = userPrincipal.getFullName();
+        } else {
+            username = null;
         }
         return username;
     }
@@ -40,6 +42,8 @@ public class SecurityController {
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             CustomUserDetails userPrincipal = (CustomUserDetails) authentication.getPrincipal();
             authorities = userPrincipal.getAuthorities();
+        } else {
+            authorities = null;
         }
         return authorities;
     }

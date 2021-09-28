@@ -16,12 +16,12 @@ public class UserEntityController {
 
     private final UserRepository userRepository;
 
-    public UserEntityController(UserRepository userRepository){
+    public UserEntityController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @GetMapping
-    public List<UserEntity> getUsers(){
+    public List<UserEntity> getUsers() {
         try {
             return userRepository.findAll();
         } catch (Exception e) {
@@ -31,9 +31,10 @@ public class UserEntityController {
     }
 
     @GetMapping("/{id}")
-    public UserEntity getUser(@PathVariable Long id){
+    public UserEntity getUser(@PathVariable Long id) {
         return userRepository.findById(id).orElseThrow(RuntimeException::new);
     }
+
 
     @PostMapping
     public ResponseEntity createUser(@RequestBody UserEntity user) throws URISyntaxException {
@@ -61,7 +62,6 @@ public class UserEntityController {
         userRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
-
 
 
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import Cookies from "js-cookie";
 import Form from "react-bootstrap/Form";
@@ -8,21 +8,33 @@ import {useHistory} from "react-router-dom";
 
 const csrfToken = Cookies.get('XSRF-TOKEN');
 
-const Logout = () => {
+const Logout = (props) => {
     const history = useHistory();
+    const [username, setUsername] = useState(props.username);
 
-    {/* TODO Make sure username is getting removed from App on logout*/}
+    useEffect(() => {
+        goBack();
+    })
 
-    const handleSubmit = () => {
+    const goBack = () => {
+        props.callBack(username);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
         axios({
-            method: 'GET',
-            url: "logout",
+            method: 'POST',
+            url: "user_logout",
             headers: {
-                Authorization: 'Basic ' + window.btoa('caseStudyUser:Hamster5Lobster9Lightbulb'),
+                /* Authorization: 'Basic ' + window.btoa('caseStudyUser:Hamster5Lobster9Lightbulb'), */
                 'X-XSRF-TOKEN': csrfToken
             }
-        })
-        history.push("/login");
+        }).then(response => {
+            setUsername("");
+            history.push("/inventory");
+            //window.location.reload();
+        }).catch((err) => console.log(err));
+
     };
 
     return (

@@ -21,6 +21,8 @@ const Inventory = () => {
 
     return (
         <div className='inventory'>
+            <h2>Hey it's me the inventory page</h2>
+
             <ul>
                 {users.map((items, i) => {
                     return (

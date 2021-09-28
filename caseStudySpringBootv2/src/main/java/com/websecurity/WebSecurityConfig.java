@@ -44,10 +44,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //.and()
                 //.exceptionHandling().authenticationEntryPoint(new RestAuthEntryPoint());
                 .and()
-                .logout().logoutSuccessUrl("/").permitAll()
+                .logout().clearAuthentication(true)
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/login")
+                .logoutUrl("/user_logout")
                 .and()
                 .cors();
-      
+        //.and()
+        //.rememberMe().key("uniqueAndSecret")
+        //.tokenValiditySeconds(86400)
+        //.alwaysRemember(true);
+
     }
 
     @Bean
@@ -93,12 +101,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         return authProvider;
     }
-
-
-
-
-
-
 
 
 }
