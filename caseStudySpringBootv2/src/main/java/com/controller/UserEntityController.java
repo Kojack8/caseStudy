@@ -1,12 +1,16 @@
 package com.controller;
 
+import com.entitymodels.RoleEntity;
 import com.entitymodels.UserEntity;
+import com.repository.RoleRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.repository.UserRepository;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -15,9 +19,11 @@ import java.util.List;
 public class UserEntityController {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public UserEntityController(UserRepository userRepository) {
+    public UserEntityController(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     @GetMapping
@@ -39,7 +45,12 @@ public class UserEntityController {
     @PostMapping
     public ResponseEntity createUser(@RequestBody UserEntity user) throws URISyntaxException {
         try {
+            RoleEntity userRole = roleRepository.findByName("ROLE_USER");
+            Collection<RoleEntity> roles = new ArrayList<RoleEntity>();
+            roles.add(userRole);
+            user.setRoles(roles);
             UserEntity savedUser = userRepository.save(user);
+
             return ResponseEntity.created(new URI("/userEntities/" + savedUser.getId())).body(savedUser);
         } catch (Exception e) {
             e.printStackTrace();
