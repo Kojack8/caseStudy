@@ -2,7 +2,10 @@ package com.userdetails;
 
 import com.entitymodels.RoleEntity;
 import com.entitymodels.UserEntity;
+import com.logging.LombokLoggingController;
 import com.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,12 +19,15 @@ import java.util.Set;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+    Logger logger = LoggerFactory.getLogger(LombokLoggingController.class);
+
     @Autowired
     private UserRepository userRepository;
 
     @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        logger.warn("You're logging in brother!");
         UserEntity user = userRepository.findByEmail(username);
         if (user == null) throw new UsernameNotFoundException("Username not found");
 
