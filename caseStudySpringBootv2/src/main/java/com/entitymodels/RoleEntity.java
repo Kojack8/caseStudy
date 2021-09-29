@@ -1,8 +1,6 @@
 package com.entitymodels;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.apache.catalina.User;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -24,20 +22,7 @@ public class RoleEntity {
     @ManyToMany(mappedBy = "roles")
     private Collection<UserEntity> users;
 
-
-    @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinTable(
-            name = "roles_privileges",
-            joinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "privilege_id", referencedColumnName = "id"))
-    private Collection<PrivilegeEntity> privileges;
-
-
     public RoleEntity(){
-
     }
 
     public RoleEntity(String name){
@@ -68,11 +53,5 @@ public class RoleEntity {
         this.users = users;
     }
 
-    public Collection<PrivilegeEntity> getPrivileges() {
-        return privileges;
-    }
 
-    public void setPrivileges(Collection<PrivilegeEntity> privileges) {
-        this.privileges = privileges;
-    }
 }

@@ -52,8 +52,6 @@ public class UserEntity {
     @Column(name = "phone", nullable = false, length = 20)
     private String phone;
 
-
-
     private boolean enabled;
 
     private boolean tokenExpired;
