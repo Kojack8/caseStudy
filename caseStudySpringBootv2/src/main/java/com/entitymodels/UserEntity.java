@@ -43,7 +43,7 @@ public class UserEntity {
     @Column(name = "state", length = 2)
     private String state = null;
 
-    @Column(name = "country", length = 60)
+    @Column(name = "country", nullable = false, length = 60)
     private String country = null;
 
     @Column(name = "zip", nullable = false, length = 15)
@@ -61,7 +61,7 @@ public class UserEntity {
             name = "users_roles",
             joinColumns = @JoinColumn(
                     name = "user_id", referencedColumnName = "id"),
-                inverseJoinColumns = @JoinColumn(
+            inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
     private Collection<RoleEntity> roles;
 
@@ -132,7 +132,7 @@ public class UserEntity {
     }
 
     public void setAddress2(String address2) {
-        if (address2 == ""){
+        if (address2 == "") {
             this.address2 = null;
         } else {
             this.address2 = address2;
@@ -184,7 +184,6 @@ public class UserEntity {
     }
 
 
-
     public Collection<RoleEntity> getRoles() {
         return roles;
     }
@@ -199,7 +198,7 @@ public class UserEntity {
     }
 
     @JsonProperty
-    public void setPassword(String password){
+    public void setPassword(String password) {
         this.password = PASSWORD_ENCODER.encode(password);
     }
 

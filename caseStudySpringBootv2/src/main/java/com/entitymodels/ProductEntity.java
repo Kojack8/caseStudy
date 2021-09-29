@@ -1,19 +1,12 @@
 package com.entitymodels;
 
-import com.logging.LombokLoggingController;
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.Set;
 
 @Entity
 @Table(name = "product")
 public class ProductEntity {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
