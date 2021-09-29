@@ -20,9 +20,6 @@ public class ProductEntity {
     @Column(name = "description", nullable = false, length = 254)
     private String description;
 
-    @Column(name = "stock_amount")
-    private Integer stockAmount = null;
-
     @Column(name = "updated_date", nullable = false)
     private Timestamp updatedDate = new Timestamp(System.currentTimeMillis());
 
@@ -54,14 +51,6 @@ public class ProductEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Integer getStockAmount() {
-        return stockAmount;
-    }
-
-    public void setStockAmount(Integer stockAmount) {
-        this.stockAmount = stockAmount;
     }
 
     public Timestamp getUpdatedDate() {
