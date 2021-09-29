@@ -27,18 +27,20 @@ export default function TestModule(){
 
     return (
        <div>
-           <ul>
-               {users.map((items, i) => {
-                   return (
-                       <ol key={i}>
-                           {items.map((subItems, sI) => {
-                           return <li key={sI}> {subItems.fullName} + {subItems.email} </li>
-                           })}
+           { users.length !== 0 ?
+                <ul>
+                   {users.map((items, i) => {
+                       return (
+                           <ol key={i}>
+                               {items.map((subItems, sI) => {
+                               return <li key={sI}> {subItems.fullName} + {subItems.email} </li>
+                               })}
 
-                       </ol>
-                   )
-               })}
-           </ul>
+                           </ol>
+                       )
+                   })}
+                </ul>
+           : null}
            {/* {users.hits.map(user => <div> {user[1].name}</div>)} */}
 
        </div>
