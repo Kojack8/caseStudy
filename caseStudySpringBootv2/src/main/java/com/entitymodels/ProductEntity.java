@@ -8,6 +8,7 @@ import java.util.Set;
 @Table(name = "product")
 public class ProductEntity {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -19,6 +20,9 @@ public class ProductEntity {
     @Column(name = "description", nullable = false, length = 254)
     private String description;
 
+    @Column(name = "stock", nullable = false)
+    private Integer stock;
+
     @Column(name = "updated_date", nullable = false)
     private Timestamp updatedDate = new Timestamp(System.currentTimeMillis());
 
@@ -27,6 +31,7 @@ public class ProductEntity {
 
     @OneToMany(mappedBy = "product")
     Set<PurchaseEntity> purchases;
+
 
     public Long getId() {
         return id;
