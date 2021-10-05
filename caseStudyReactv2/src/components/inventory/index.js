@@ -62,6 +62,7 @@ const Inventory = () => {
                 <tr>
                     <td>Name</td>
                     <td>Description</td>
+                    <td>Stock</td>
                     <td>Price</td>
                     <td>Last Update</td>
                 </tr>
@@ -73,6 +74,7 @@ const Inventory = () => {
                         <tr key={i}>
                             <td>{items.name}</td>
                             <td>{items.description}</td>
+                            <td>{items.stock}</td>
                             <td>{items.price}</td>
                             <td>{items.updatedDate}</td>
                         </tr>
