@@ -1,8 +1,10 @@
 package com.controller;
 
 import com.entitymodels.RoleEntity;
+import com.entitymodels.ShoppingCartEntity;
 import com.entitymodels.UserEntity;
 import com.repository.RoleRepository;
+import com.repository.ShoppingCartRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.repository.UserRepository;
@@ -20,10 +22,13 @@ public class UserEntityController {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final ShoppingCartRepository shoppingCartRepository;
 
-    public UserEntityController(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserEntityController(UserRepository userRepository, RoleRepository roleRepository,
+            ShoppingCartRepository shoppingCartRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.shoppingCartRepository = shoppingCartRepository;
     }
 
     @GetMapping
@@ -49,7 +54,21 @@ public class UserEntityController {
             Collection<RoleEntity> roles = new ArrayList<RoleEntity>();
             roles.add(userRole);
             user.setRoles(roles);
+
+            ShoppingCartEntity cart = new ShoppingCartEntity();
+
+            ShoppingCartEntity savedCart = shoppingCartRepository.save(cart);
+            ArrayList<ShoppingCartEntity> carts = new ArrayList<ShoppingCartEntity>();
+            carts.add(cart);
+            user.setCarts(carts);
             UserEntity savedUser = userRepository.save(user);
+
+
+            savedCart.setUserEntity(savedUser);
+            shoppingCartRepository.save(savedCart);
+
+
+
 
             return ResponseEntity.created(new URI("/userEntities/" + savedUser.getId())).body(savedUser);
         } catch (Exception e) {

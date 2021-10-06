@@ -1,6 +1,8 @@
 package com.entitymodels;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -62,6 +64,13 @@ public class UserEntity {
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
     private Collection<RoleEntity> roles;
+
+    @JsonManagedReference
+    @OneToMany
+    @JoinColumn(name = "shopping_cart_id")
+    private Collection<ShoppingCartEntity> carts;
+
+
 
 
     public UserEntity() {
@@ -214,6 +223,14 @@ public class UserEntity {
 
     public void setTokenExpired(boolean tokenExpired) {
         this.tokenExpired = tokenExpired;
+    }
+
+    public Collection<ShoppingCartEntity> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(Collection<ShoppingCartEntity> carts) {
+        this.carts = carts;
     }
 
     @Override

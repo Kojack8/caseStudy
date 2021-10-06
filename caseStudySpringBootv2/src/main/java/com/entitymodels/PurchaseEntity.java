@@ -13,12 +13,43 @@ public class PurchaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    UserEntity user;
+    private UserEntity user;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    ProductEntity product;
+    private ProductEntity product;
 
-    LocalDateTime purchasedAt;
+    private LocalDateTime purchasedAt;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public ProductEntity getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductEntity product) {
+        this.product = product;
+    }
+
+    public LocalDateTime getPurchasedAt() {
+        return purchasedAt;
+    }
+
+    public void setPurchasedAt(LocalDateTime purchasedAt) {
+        this.purchasedAt = purchasedAt;
+    }
 }

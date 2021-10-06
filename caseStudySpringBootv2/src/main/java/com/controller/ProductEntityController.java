@@ -32,7 +32,7 @@ public class ProductEntityController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateProduct(@PathVariable Long id, @RequestBody ProductEntity product) {
+    public ResponseEntity updateProduct(@PathVariable Integer id, @RequestBody ProductEntity product) {
         ProductEntity currentProduct = productRepository.findById(id).orElseThrow(RuntimeException::new);
         currentProduct.setName(product.getName());
         currentProduct.setDescription(product.getDescription());
@@ -42,7 +42,7 @@ public class ProductEntityController {
     }
 
     @DeleteMapping("/{id")
-    public ResponseEntity deleteProduct(@PathVariable long id) {
+    public ResponseEntity deleteProduct(@PathVariable Integer id) {
         productRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }

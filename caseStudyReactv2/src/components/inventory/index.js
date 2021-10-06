@@ -14,6 +14,7 @@ const Inventory = () => {
     const [searchName, setSearchName] = useState("");
     const [products, setProducts] = useState("");
 
+
     useEffect(() => {
         //This logs the new XSRF-TOKEN after a user logs out and is not related to the search function
         axios({ url: `${baseURL}`,
@@ -42,6 +43,25 @@ const Inventory = () => {
         })
     }
 
+    const addToCart = (id) => {
+
+        axios({
+
+            method: 'POST',
+            url: "cartitem",
+            data: ({
+                id
+            }),
+            headers: {
+                'X-XSRF-TOKEN': csrfToken
+            }
+        }).then((res) => {
+            console.log(res);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
     return (
         <div className="InvPage">
             <h2>Hey it's me the inventory page</h2>
@@ -65,6 +85,7 @@ const Inventory = () => {
                     <td>Stock</td>
                     <td>Price</td>
                     <td>Last Update</td>
+                    <td>Add to cart</td>
                 </tr>
                 </thead>
             { products !== "" ?
@@ -77,6 +98,9 @@ const Inventory = () => {
                             <td>{items.stock}</td>
                             <td>{items.price}</td>
                             <td>{items.updatedDate}</td>
+                            <td>
+                                <button onClick={() => addToCart(items.id)}> Add </button>
+                            </td>
                         </tr>
                     )
                 })

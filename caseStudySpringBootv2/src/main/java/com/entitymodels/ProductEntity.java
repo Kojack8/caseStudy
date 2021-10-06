@@ -12,9 +12,9 @@ public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Integer id;
 
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "name", nullable = false, length = 50, unique = true)
     private String name;
 
     @Column(name = "description", nullable = false, length = 254)
@@ -31,13 +31,16 @@ public class ProductEntity {
 
     @OneToMany(mappedBy = "product")
     Set<PurchaseEntity> purchases;
+    
+    @OneToMany(mappedBy = "product")
+    Set<CartItemEntity> carts;
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
