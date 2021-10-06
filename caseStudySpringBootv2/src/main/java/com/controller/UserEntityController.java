@@ -55,17 +55,20 @@ public class UserEntityController {
             roles.add(userRole);
             user.setRoles(roles);
 
-            ShoppingCartEntity cart = new ShoppingCartEntity();
+            /*ShoppingCartEntity cart = new ShoppingCartEntity();
 
             ShoppingCartEntity savedCart = shoppingCartRepository.save(cart);
             ArrayList<ShoppingCartEntity> carts = new ArrayList<ShoppingCartEntity>();
             carts.add(cart);
-            user.setCarts(carts);
+            user.setCarts(carts);*/
             UserEntity savedUser = userRepository.save(user);
+            ShoppingCartEntity cart = new ShoppingCartEntity();
+            cart.setUserEntity(savedUser);
+            shoppingCartRepository.save(cart);
 
 
-            savedCart.setUserEntity(savedUser);
-            shoppingCartRepository.save(savedCart);
+            /*savedCart.setUserEntity(savedUser);
+            shoppingCartRepository.save(savedCart);*/
 
 
 

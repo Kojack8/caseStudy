@@ -65,10 +65,6 @@ public class UserEntity {
                     name = "role_id", referencedColumnName = "id"))
     private Collection<RoleEntity> roles;
 
-    @JsonManagedReference
-    @OneToMany
-    @JoinColumn(name = "shopping_cart_id")
-    private Collection<ShoppingCartEntity> carts;
 
 
 
@@ -225,13 +221,7 @@ public class UserEntity {
         this.tokenExpired = tokenExpired;
     }
 
-    public Collection<ShoppingCartEntity> getCarts() {
-        return carts;
-    }
 
-    public void setCarts(Collection<ShoppingCartEntity> carts) {
-        this.carts = carts;
-    }
 
     @Override
     public boolean equals(Object o) {

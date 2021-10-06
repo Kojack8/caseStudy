@@ -17,8 +17,8 @@ public class ShoppingCartEntity {
     @Column(name = "updated_date", nullable = false)
     private Timestamp updatedDate = new Timestamp(System.currentTimeMillis());
 
-    @JsonBackReference
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 
     public Integer getId() {
