@@ -1,10 +1,15 @@
 package com.controller;
 
+import com.dto.UserDTO;
 import com.entitymodels.RoleEntity;
 import com.entitymodels.ShoppingCartEntity;
 import com.entitymodels.UserEntity;
 import com.repository.RoleRepository;
 import com.repository.ShoppingCartRepository;
+import com.service.UserService;
+import com.service.UserServiceImpl;
+import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.repository.UserRepository;
@@ -23,18 +28,21 @@ public class UserEntityController {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final ShoppingCartRepository shoppingCartRepository;
+    private final UserService userService;
 
     public UserEntityController(UserRepository userRepository, RoleRepository roleRepository,
-            ShoppingCartRepository shoppingCartRepository) {
+                                ShoppingCartRepository shoppingCartRepository, UserServiceImpl userService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.shoppingCartRepository = shoppingCartRepository;
+        this.userService = userService;
     }
 
     @GetMapping
-    public List<UserEntity> getUsers() {
+    public List<UserDTO> getUsers() {
         try {
-            return userRepository.findAll();
+            List<UserDTO> users = userService.findAllUsers();
+            return users;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -42,8 +50,9 @@ public class UserEntityController {
     }
 
     @GetMapping("/{id}")
-    public UserEntity getUser(@PathVariable Long id) {
-        return userRepository.findById(id).orElseThrow(RuntimeException::new);
+    public UserDTO getUser(@PathVariable Long id) {
+        //return userRepository.findById(id).orElseThrow(RuntimeException::new);
+        return userService.findUserById(id);
     }
 
 
@@ -71,8 +80,6 @@ public class UserEntityController {
             shoppingCartRepository.save(savedCart);*/
 
 
-
-
             return ResponseEntity.created(new URI("/userEntities/" + savedUser.getId())).body(savedUser);
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,13 +88,15 @@ public class UserEntityController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateUser(@PathVariable Long id, @RequestBody UserEntity user) {
-        UserEntity currentUser = userRepository.findById(id).orElseThrow(RuntimeException::new);
+    public ResponseEntity updateUser(@PathVariable Long id, @RequestBody UserDTO user) {
+        //UserEntity currentUser = userRepository.findById(id).orElseThrow(RuntimeException::new);
+        UserDTO currentUser = userService.findUserById(id);
         currentUser.setFullName(user.getFullName());
         currentUser.setEmail(user.getEmail());
-        currentUser = userRepository.save(user);
+        userService.convertToEntity(currentUser);
+        UserEntity savedUser = userRepository.save(userService.convertToEntity(currentUser));
 
-        return ResponseEntity.ok(currentUser);
+        return ResponseEntity.ok(savedUser);
     }
 
     @DeleteMapping("/{id}")
