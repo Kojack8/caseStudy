@@ -7,8 +7,7 @@ import com.entitymodels.UserEntity;
 import com.repository.RoleRepository;
 import com.repository.ShoppingCartRepository;
 import com.service.UserService;
-import com.service.UserServiceImpl;
-import org.apache.catalina.User;
+import com.service.UserHibernateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +29,9 @@ public class UserEntityController {
     private final ShoppingCartRepository shoppingCartRepository;
     private final UserService userService;
 
+    @Autowired
     public UserEntityController(UserRepository userRepository, RoleRepository roleRepository,
-                                ShoppingCartRepository shoppingCartRepository, UserServiceImpl userService) {
+                                ShoppingCartRepository shoppingCartRepository, UserHibernateService userService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.shoppingCartRepository = shoppingCartRepository;
@@ -93,15 +93,16 @@ public class UserEntityController {
         UserDTO currentUser = userService.findUserById(id);
         currentUser.setFullName(user.getFullName());
         currentUser.setEmail(user.getEmail());
-        userService.convertToEntity(currentUser);
-        UserEntity savedUser = userRepository.save(userService.convertToEntity(currentUser));
+        UserDTO savedUser = userService.save(currentUser);
+        //userService.convertToEntity(currentUser);
+        //UserEntity savedUser = userRepository.save(userService.convertToEntity(currentUser));
 
         return ResponseEntity.ok(savedUser);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteUser(@PathVariable long id) {
-        userRepository.deleteById(id);
+        userService.deleteById(id);
         return ResponseEntity.ok().build();
     }
 

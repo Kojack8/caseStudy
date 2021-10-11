@@ -19,7 +19,7 @@ public class RoleEntity {
 
     @JsonBackReference
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles", cascade = {CascadeType.REMOVE})
     private Collection<UserEntity> users;
 
     public RoleEntity(){

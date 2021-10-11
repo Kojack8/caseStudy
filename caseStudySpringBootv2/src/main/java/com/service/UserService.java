@@ -10,7 +10,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+
 public interface UserService {
 
 
@@ -21,4 +21,8 @@ public interface UserService {
     public UserDTO convertToUserDTO(UserEntity user);
 
     public UserEntity convertToEntity(UserDTO userDTO);
+
+    public UserDTO save(UserDTO userDTO);
+
+    void deleteById(Long id);
 }

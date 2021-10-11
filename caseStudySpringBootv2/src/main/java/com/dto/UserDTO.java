@@ -1,6 +1,7 @@
 package com.dto;
 
 import com.entitymodels.RoleEntity;
+import com.entitymodels.UserEntity;
 
 import java.util.Collection;
 
@@ -20,6 +21,24 @@ public class UserDTO {
     private boolean enabled;
     private boolean tokenExpired;
 
+    public UserDTO() {
+    }
+
+    public UserDTO(UserEntity user) {
+        this.fullName = user.getFullName();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.address1 = user.getAddress1();
+        this.address2 = user.getAddress2();
+        this.city = user.getCity();
+        this.state = user.getState();
+        this.country = user.getCountry();
+        this.zip = user.getZip();
+        this.phone = user.getPhone();
+        this.roles = user.getRoles();
+        this.enabled = user.isEnabled();
+        this.tokenExpired = user.isTokenExpired();
+    }
 
     public String getFullName() {
         return fullName;

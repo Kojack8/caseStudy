@@ -11,11 +11,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserHibernateService implements UserService {
 
     private final UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    @Autowired
+    public UserHibernateService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -66,5 +67,16 @@ public class UserServiceImpl implements UserService {
 
         return user;
 
+    }
+
+    public UserDTO save(UserDTO userDTO) {
+        UserEntity user = convertToEntity(userDTO);
+        UserEntity savedUser = userRepository.save(user);
+
+        return new UserDTO(savedUser);
+    }
+
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
     }
 }

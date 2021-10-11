@@ -1,6 +1,8 @@
 package com.entitymodels;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -19,6 +21,7 @@ public class ShoppingCartEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private UserEntity userEntity;
 
     public Integer getId() {
