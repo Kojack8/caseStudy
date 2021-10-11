@@ -7,6 +7,7 @@ import java.util.Collection;
 
 public class UserDTO {
 
+    private Long id;
     private String fullName;
     private String email;
     private String password;
@@ -25,6 +26,7 @@ public class UserDTO {
     }
 
     public UserDTO(UserEntity user) {
+        this.id = user.getId();
         this.fullName = user.getFullName();
         this.email = user.getEmail();
         this.password = user.getPassword();
@@ -38,6 +40,14 @@ public class UserDTO {
         this.roles = user.getRoles();
         this.enabled = user.isEnabled();
         this.tokenExpired = user.isTokenExpired();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFullName() {

@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.repository.UserRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class UserEntityController {
 
     @Autowired
     public UserEntityController(UserRepository userRepository, RoleRepository roleRepository,
-                                ShoppingCartRepository shoppingCartRepository, UserHibernateService userService) {
+                                ShoppingCartRepository shoppingCartRepository, UserService userService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.shoppingCartRepository = shoppingCartRepository;
@@ -57,7 +58,7 @@ public class UserEntityController {
 
 
     @PostMapping
-    public ResponseEntity createUser(@RequestBody UserEntity user) throws URISyntaxException {
+    public ResponseEntity createUser(@RequestBody UserDTO user) throws URISyntaxException {
         try {
             RoleEntity userRole = roleRepository.findByName("ROLE_USER");
             Collection<RoleEntity> roles = new ArrayList<RoleEntity>();
@@ -70,9 +71,12 @@ public class UserEntityController {
             ArrayList<ShoppingCartEntity> carts = new ArrayList<ShoppingCartEntity>();
             carts.add(cart);
             user.setCarts(carts);*/
-            UserEntity savedUser = userRepository.save(user);
+            UserDTO savedUser = userService.save(user);
+            //UserEntity savedUser = userRepository.save(user);
+            UserEntity savedEntity = userRepository.findById(savedUser.getId())
+                    .orElseThrow(() -> new EntityNotFoundException(String.valueOf(savedUser)));
             ShoppingCartEntity cart = new ShoppingCartEntity();
-            cart.setUserEntity(savedUser);
+            cart.setUserEntity(savedEntity);
             shoppingCartRepository.save(cart);
 
 

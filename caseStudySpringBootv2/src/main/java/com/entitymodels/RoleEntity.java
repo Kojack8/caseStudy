@@ -3,6 +3,8 @@ package com.entitymodels;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -19,7 +21,8 @@ public class RoleEntity {
 
     @JsonBackReference
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany(mappedBy = "roles", cascade = {CascadeType.REMOVE})
+    @ManyToMany(mappedBy = "roles")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Collection<UserEntity> users;
 
     public RoleEntity(){
