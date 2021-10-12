@@ -30,10 +30,10 @@ public class ProductEntity {
     private Double price;
 
     @OneToMany(mappedBy = "product")
-    Set<PurchaseEntity> purchases;
+    private Set<PurchaseEntity> purchases;
     
     @OneToMany(mappedBy = "product")
-    Set<CartItemEntity> carts;
+    private Set<CartItemEntity> carts;
 
 
     public Integer getId() {
@@ -82,5 +82,21 @@ public class ProductEntity {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Set<PurchaseEntity> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(Set<PurchaseEntity> purchases) {
+        this.purchases = purchases;
+    }
+
+    public Set<CartItemEntity> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(Set<CartItemEntity> carts) {
+        this.carts = carts;
     }
 }

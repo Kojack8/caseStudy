@@ -20,7 +20,7 @@ public interface UserService {
 
     public UserDTO convertToUserDTO(UserEntity user);
 
-    public UserEntity convertToEntity(UserDTO userDTO);
+    // public UserEntity convertToEntity(UserDTO userDTO);
 
     public UserDTO save(UserDTO userDTO);
 

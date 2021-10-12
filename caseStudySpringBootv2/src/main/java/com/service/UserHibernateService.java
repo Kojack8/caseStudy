@@ -72,8 +72,9 @@ public class UserHibernateService implements UserService {
     public UserDTO save(UserDTO userDTO) {
         UserEntity user = convertToEntity(userDTO);
         UserEntity savedUser = userRepository.save(user);
+        UserDTO savedDTO = convertToUserDTO(savedUser);
 
-        return new UserDTO(savedUser);
+        return savedDTO;
     }
 
     public void deleteById(Long id) {

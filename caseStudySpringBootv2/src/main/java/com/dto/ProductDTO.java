@@ -1,49 +1,89 @@
 package com.dto;
 
+import com.entitymodels.CartItemEntity;
 import com.entitymodels.ProductEntity;
+import com.entitymodels.PurchaseEntity;
 import com.entitymodels.UserEntity;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 public class ProductDTO {
 
-    private Long id;
-    private UserEntity user;
-    private ProductEntity product;
-    private LocalDateTime purchasedAt;
+    private Integer id;
+    private String name;
+    private String description;
+    private Integer stock;
+    private Timestamp updatedDate;
+    private Double price;
+    private Set<PurchaseEntity> purchases;
+    private Set<CartItemEntity> carts;
 
     public ProductDTO() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public UserEntity getUser() {
-        return user;
+    public String getName() {
+        return name;
     }
 
-    public void setUser(UserEntity user) {
-        this.user = user;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public ProductEntity getProduct() {
-        return product;
+    public String getDescription() {
+        return description;
     }
 
-    public void setProduct(ProductEntity product) {
-        this.product = product;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public LocalDateTime getPurchasedAt() {
-        return purchasedAt;
+    public Integer getStock() {
+        return stock;
     }
 
-    public void setPurchasedAt(LocalDateTime purchasedAt) {
-        this.purchasedAt = purchasedAt;
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+    public Timestamp getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Timestamp updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Set<PurchaseEntity> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(Set<PurchaseEntity> purchases) {
+        this.purchases = purchases;
+    }
+
+    public Set<CartItemEntity> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(Set<CartItemEntity> carts) {
+        this.carts = carts;
     }
 }
