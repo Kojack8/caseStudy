@@ -7,7 +7,6 @@ import com.entitymodels.UserEntity;
 import com.repository.RoleRepository;
 import com.repository.ShoppingCartRepository;
 import com.service.UserService;
-import com.service.UserHibernateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -41,9 +41,9 @@ public class ProductEntityController {
         ProductDTO currentProduct = productService.findById(id);
         currentProduct.setName(product.getName());
         currentProduct.setDescription(product.getDescription());
-        currentProduct = productService.save(product);
+        ProductDTO savedProduct = productService.save(currentProduct);
 
-        return ResponseEntity.ok(currentProduct);
+        return ResponseEntity.ok(savedProduct);
     }
 
     @DeleteMapping("/{id")

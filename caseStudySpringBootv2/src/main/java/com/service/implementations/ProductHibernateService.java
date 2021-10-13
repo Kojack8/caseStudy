@@ -1,9 +1,10 @@
-package com.service;
+package com.service.implementations;
 
 import com.dto.ProductDTO;
 import com.entitymodels.ProductEntity;
 import com.entitymodels.UserEntity;
 import com.repository.ProductRepository;
+import com.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
