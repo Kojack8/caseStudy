@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ProductService {
 
+    public ProductDTO findById(Integer id);
+
     public ProductDTO findByName(String name);
 
     public List<ProductDTO> findAllProducts();

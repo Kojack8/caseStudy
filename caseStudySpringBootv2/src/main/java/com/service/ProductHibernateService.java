@@ -25,6 +25,12 @@ public class ProductHibernateService implements ProductService {
         return convertToProductDTO(product);
     }
 
+    public ProductDTO findById(Integer id){
+        ProductEntity product = productRepository.findById(id).orElseThrow(RuntimeException::new);
+        return convertToProductDTO(product);
+
+    }
+
     public List<ProductDTO> findAllProducts() {
         return ((List<ProductEntity>) productRepository
                 .findAll())
@@ -64,7 +70,7 @@ public class ProductHibernateService implements ProductService {
         ProductEntity savedProduct = productRepository.save(product);
         ProductDTO savedDTO = convertToProductDTO(savedProduct);
 
-        return productDTO;
+        return savedDTO;
     }
 
     public void deleteById(Integer id) {

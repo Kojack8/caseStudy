@@ -19,7 +19,7 @@ public class SearchController {
 
     @GetMapping
     public List<ProductEntity> getProducts(@RequestParam (required = false) String name){
-        if (name == "") {
+        if (name == "" || name == null) {
             return productRepository.findAll();
         }
         return productRepository.findAllByName(name);
