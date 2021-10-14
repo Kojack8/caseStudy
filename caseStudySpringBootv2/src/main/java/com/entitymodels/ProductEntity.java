@@ -2,6 +2,7 @@ package com.entitymodels;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -30,10 +31,10 @@ public class ProductEntity {
     private Double price;
 
     @OneToMany(mappedBy = "product")
-    private Set<PurchaseEntity> purchases;
+    private List<PurchaseEntity> purchases;
     
     @OneToMany(mappedBy = "product")
-    private Set<CartItemEntity> carts;
+    private List<CartItemEntity> carts;
 
 
     public Integer getId() {
@@ -84,19 +85,19 @@ public class ProductEntity {
         this.stock = stock;
     }
 
-    public Set<PurchaseEntity> getPurchases() {
+    public List<PurchaseEntity> getPurchases() {
         return purchases;
     }
 
-    public void setPurchases(Set<PurchaseEntity> purchases) {
+    public void setPurchases(List<PurchaseEntity> purchases) {
         this.purchases = purchases;
     }
 
-    public Set<CartItemEntity> getCarts() {
+    public List<CartItemEntity> getCarts() {
         return carts;
     }
 
-    public void setCarts(Set<CartItemEntity> carts) {
+    public void setCarts(List<CartItemEntity> carts) {
         this.carts = carts;
     }
 }

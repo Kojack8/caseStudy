@@ -4,8 +4,11 @@ import com.dto.ProductDTO;
 import com.entitymodels.ProductEntity;
 import com.entitymodels.UserEntity;
 import com.repository.ProductRepository;
+import com.service.CartItemService;
 import com.service.ProductService;
+import com.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,10 +18,15 @@ import java.util.stream.Collectors;
 public class ProductHibernateService implements ProductService {
 
     private final ProductRepository productRepository;
+    private final CartItemService cartItemService;
+    private final PurchaseService purchaseService;
 
     @Autowired
-    public ProductHibernateService(ProductRepository productRepository) {
+    public ProductHibernateService(ProductRepository productRepository, CartItemService cartItemService,
+                                   @Lazy PurchaseService purchaseService) {
         this.productRepository = productRepository;
+        this.cartItemService = cartItemService;
+        this.purchaseService = purchaseService;
     }
 
     public ProductDTO findByName(String name) {
@@ -48,8 +56,15 @@ public class ProductHibernateService implements ProductService {
         productDTO.setStock(product.getStock());
         productDTO.setUpdatedDate(product.getUpdatedDate());
         productDTO.setPrice(product.getPrice());
-        productDTO.setPurchases(product.getPurchases());
-        productDTO.setCarts(product.getCarts());
+        productDTO.setPurchases(product.getPurchases()
+                .stream()
+                .map(purchases -> purchaseService.convertToPurchaseDTO(purchases))
+                .collect(Collectors.toList()));
+        productDTO.setCarts(product.getCarts()
+                .stream()
+                .map(cartItems -> cartItemService.convertToCartItemDTO(cartItems))
+                .collect(Collectors.toList()));
+
 
         return productDTO;
     }
@@ -61,8 +76,15 @@ public class ProductHibernateService implements ProductService {
         product.setStock(productDTO.getStock());
         product.setUpdatedDate(productDTO.getUpdatedDate());
         product.setPrice(productDTO.getPrice());
-        product.setPurchases(productDTO.getPurchases());
-        product.setCarts(productDTO.getCarts());
+        product.setPurchases(productDTO.getPurchases()
+                .stream()
+                .map(purchases -> purchaseService.convertToPurchaseEntity(purchases))
+                .collect(Collectors.toList()));
+        product.setCarts(productDTO.getCarts()
+                .stream()
+                .map(cartItems -> cartItemService.convertToEntity(cartItems))
+                .collect(Collectors.toList()));
+
         return product;
     }
 

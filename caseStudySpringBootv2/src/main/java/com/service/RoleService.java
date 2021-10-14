@@ -7,11 +7,15 @@ import java.util.List;
 
 public interface RoleService {
 
-    public RoleDTO findByName(String name);
+    RoleDTO findByName(String name);
 
-    public List<RoleDTO> findAllRoles();
+    RoleEntity findEntityByName(String name);
 
-    public RoleDTO convertToRoleDTO(RoleEntity roleEntity);
+    List<RoleDTO> findAllRoles();
+
+    RoleDTO convertToRoleDTO(RoleEntity roleEntity);
+
+    RoleEntity convertToRoleEntity(RoleDTO roleDTO);
 
     public void deleteById(Long id);
 }

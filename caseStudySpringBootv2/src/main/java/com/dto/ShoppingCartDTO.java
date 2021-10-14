@@ -8,7 +8,7 @@ public class ShoppingCartDTO {
 
     private Integer id;
     private Timestamp updatedDate;
-    private UserEntity userEntity;
+    private UserDTO userDTO;
 
     public ShoppingCartDTO() {
     }
@@ -29,11 +29,11 @@ public class ShoppingCartDTO {
         this.updatedDate = updatedDate;
     }
 
-    public UserEntity getUserEntity() {
-        return userEntity;
+    public UserDTO getUserDTO() {
+        return userDTO;
     }
 
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
+    public void setUserDTO(UserDTO userDTO) {
+        this.userDTO = userDTO;
     }
 }

@@ -18,29 +18,13 @@ public class UserDTO {
     private String country;
     private String zip;
     private String phone;
-    private Collection<RoleEntity> roles;
+    private Collection<String> roles;
     private boolean enabled;
     private boolean tokenExpired;
 
     public UserDTO() {
     }
 
-    public UserDTO(UserEntity user) {
-        this.id = user.getId();
-        this.fullName = user.getFullName();
-        this.email = user.getEmail();
-        this.password = user.getPassword();
-        this.address1 = user.getAddress1();
-        this.address2 = user.getAddress2();
-        this.city = user.getCity();
-        this.state = user.getState();
-        this.country = user.getCountry();
-        this.zip = user.getZip();
-        this.phone = user.getPhone();
-        this.roles = user.getRoles();
-        this.enabled = user.isEnabled();
-        this.tokenExpired = user.isTokenExpired();
-    }
 
     public Long getId() {
         return id;
@@ -114,11 +98,11 @@ public class UserDTO {
         this.phone = phone;
     }
 
-    public Collection<RoleEntity> getRoles() {
+    public Collection<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<RoleEntity> roles) {
+    public void setRoles(Collection<String> roles) {
         this.roles = roles;
     }
 

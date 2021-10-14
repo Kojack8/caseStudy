@@ -7,16 +7,16 @@ import java.util.List;
 
 public interface CartItemService {
 
-    public CartItemDTO findById(int id);
+    CartItemDTO findById(int id);
 
-    public List<CartItemDTO> findAllCartItems();
+    List<CartItemDTO> findAllCartItems();
 
-    public CartItemDTO convertToCartItemDTO(CartItemEntity cartItemEntity);
+    CartItemDTO convertToCartItemDTO(CartItemEntity cartItemEntity);
 
-    public CartItemEntity convertToEntity(CartItemDTO cartItemDTO);
+    CartItemEntity convertToEntity(CartItemDTO cartItemDTO);
 
-    public CartItemDTO save(CartItemDTO cartItemDTO);
+    CartItemDTO save(CartItemDTO cartItemDTO);
 
-    public void deleteById(Integer id);
+    void deleteById(Integer id);
 
 }

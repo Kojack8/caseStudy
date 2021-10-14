@@ -7,6 +7,7 @@ import com.entitymodels.UserEntity;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 public class ProductDTO {
@@ -17,8 +18,8 @@ public class ProductDTO {
     private Integer stock;
     private Timestamp updatedDate;
     private Double price;
-    private Set<PurchaseEntity> purchases;
-    private Set<CartItemEntity> carts;
+    private List<PurchaseDTO> purchases;
+    private List<CartItemDTO> carts;
 
     public ProductDTO() {
     }
@@ -71,19 +72,19 @@ public class ProductDTO {
         this.price = price;
     }
 
-    public Set<PurchaseEntity> getPurchases() {
+    public List<PurchaseDTO> getPurchases() {
         return purchases;
     }
 
-    public void setPurchases(Set<PurchaseEntity> purchases) {
+    public void setPurchases(List<PurchaseDTO> purchases) {
         this.purchases = purchases;
     }
 
-    public Set<CartItemEntity> getCarts() {
+    public List<CartItemDTO> getCarts() {
         return carts;
     }
 
-    public void setCarts(Set<CartItemEntity> carts) {
+    public void setCarts(List<CartItemDTO> carts) {
         this.carts = carts;
     }
 }

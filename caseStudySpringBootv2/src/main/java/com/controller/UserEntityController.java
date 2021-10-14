@@ -1,11 +1,14 @@
 package com.controller;
 
+import com.dto.RoleDTO;
+import com.dto.ShoppingCartDTO;
 import com.dto.UserDTO;
 import com.entitymodels.RoleEntity;
 import com.entitymodels.ShoppingCartEntity;
 import com.entitymodels.UserEntity;
-import com.repository.RoleRepository;
 import com.repository.ShoppingCartRepository;
+import com.service.RoleService;
+import com.service.ShoppingCartService;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,15 +28,15 @@ import java.util.List;
 public class UserEntityController {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    private final RoleService roleService;
     private final ShoppingCartRepository shoppingCartRepository;
     private final UserService userService;
 
     @Autowired
-    public UserEntityController(UserRepository userRepository, RoleRepository roleRepository,
+    public UserEntityController(UserRepository userRepository, RoleService roleService,
                                 ShoppingCartRepository shoppingCartRepository, UserService userService) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
+        this.roleService = roleService;
         this.shoppingCartRepository = shoppingCartRepository;
         this.userService = userService;
     }
@@ -59,28 +62,18 @@ public class UserEntityController {
     @PostMapping
     public ResponseEntity createUser(@RequestBody UserDTO user) throws URISyntaxException {
         try {
-            RoleEntity userRole = roleRepository.findByName("ROLE_USER");
-            Collection<RoleEntity> roles = new ArrayList<RoleEntity>();
+            String userRole = "ROLE_USER";
+            Collection<String> roles = new ArrayList<String>();
             roles.add(userRole);
             user.setRoles(roles);
 
-            /*ShoppingCartEntity cart = new ShoppingCartEntity();
-
-            ShoppingCartEntity savedCart = shoppingCartRepository.save(cart);
-            ArrayList<ShoppingCartEntity> carts = new ArrayList<ShoppingCartEntity>();
-            carts.add(cart);
-            user.setCarts(carts);*/
             UserDTO savedUser = userService.save(user);
-            //UserEntity savedUser = userRepository.save(user);
+
             UserEntity savedEntity = userRepository.findById(savedUser.getId())
                     .orElseThrow(() -> new EntityNotFoundException(String.valueOf(savedUser)));
             ShoppingCartEntity cart = new ShoppingCartEntity();
             cart.setUserEntity(savedEntity);
             shoppingCartRepository.save(cart);
-
-
-            /*savedCart.setUserEntity(savedUser);
-            shoppingCartRepository.save(savedCart);*/
 
 
             return ResponseEntity.created(new URI("/userEntities/" + savedUser.getId())).body(savedUser);

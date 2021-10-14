@@ -1,6 +1,8 @@
 package com.service;
 
+import com.dto.RoleDTO;
 import com.dto.UserDTO;
+import com.entitymodels.RoleEntity;
 import com.entitymodels.UserEntity;
 import com.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ public interface UserService {
 
     public UserDTO convertToUserDTO(UserEntity user);
 
-    // public UserEntity convertToEntity(UserDTO userDTO);
+    public UserEntity convertToUserEntity(UserDTO userDTO);
 
     public UserDTO save(UserDTO userDTO);
 
