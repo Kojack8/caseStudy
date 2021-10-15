@@ -7,7 +7,11 @@ import com.entitymodels.UserEntity;
 import com.repository.ShoppingCartRepository;
 import com.service.ShoppingCartService;
 import com.service.UserService;
+import com.userdetails.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,12 +32,26 @@ public class ShoppingCartHibernateService implements ShoppingCartService {
         return convertToShoppingCartDTO(shoppingCart);
     }
 
+    public ShoppingCartDTO findByUserEntity(UserEntity userEntity){
+        ShoppingCartEntity cart = shoppingCartRepository.findByUserEntity(userEntity);
+        ShoppingCartDTO cartDTO = convertToShoppingCartDTO(cart);
+        return cartDTO;
+    }
+
+    public ShoppingCartEntity findCartEntityByUserID(Long id){
+        UserEntity user = userService.findUserEntityById(id);
+        ShoppingCartEntity cart = shoppingCartRepository.findByUserEntity(user);
+
+        return cart;
+    }
+
     public ShoppingCartDTO convertToShoppingCartDTO(ShoppingCartEntity shoppingCartEntity){
         ShoppingCartDTO shoppingCartDTO = new ShoppingCartDTO();
         shoppingCartDTO.setId(shoppingCartEntity.getId());
         shoppingCartDTO.setUpdatedDate(shoppingCartEntity.getUpdatedDate());
         UserDTO user = userService.convertToUserDTO(shoppingCartEntity.getUserEntity());
         shoppingCartDTO.setUserDTO(user);
+
 
         return shoppingCartDTO;
     }

@@ -16,15 +16,17 @@ import java.util.stream.Collectors;
 public interface UserService {
 
 
-    public UserDTO findUserById(Long id);
+    UserDTO findUserById(Long id);
 
-    public List<UserDTO> findAllUsers();
+    List<UserDTO> findAllUsers();
 
-    public UserDTO convertToUserDTO(UserEntity user);
+    UserDTO convertToUserDTO(UserEntity user);
 
-    public UserEntity convertToUserEntity(UserDTO userDTO);
+    UserEntity convertToUserEntity(UserDTO userDTO);
 
-    public UserDTO save(UserDTO userDTO);
+    UserEntity findUserEntityById(Long id);
+
+    UserDTO save(UserDTO userDTO);
 
     void deleteById(Long id);
 }

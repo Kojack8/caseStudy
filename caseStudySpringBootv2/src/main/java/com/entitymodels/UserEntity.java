@@ -195,7 +195,6 @@ public class UserEntity {
         this.roles = roles;
     }
 
-    @JsonIgnore
     public String getPassword() {
         return password;
     }

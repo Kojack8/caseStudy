@@ -9,7 +9,11 @@ public interface CartItemService {
 
     CartItemDTO findById(int id);
 
+    List<CartItemDTO> findByUserId(long id);
+
     List<CartItemDTO> findAllCartItems();
+
+    CartItemDTO addCartItem(int id);
 
     CartItemDTO convertToCartItemDTO(CartItemEntity cartItemEntity);
 

@@ -7,6 +7,7 @@ import com.entitymodels.UserEntity;
 import com.repository.UserRepository;
 import com.service.RoleService;
 import com.service.UserService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,7 @@ public class UserHibernateService implements UserService {
         userDTO.setId(user.getId());
         userDTO.setFullName(user.getFullName());
         userDTO.setEmail(user.getEmail());
+        userDTO.setPassword(user.getPassword());
         userDTO.setAddress1(user.getAddress1());
         userDTO.setAddress2(user.getAddress2());
         userDTO.setCity(user.getCity());
@@ -84,6 +86,12 @@ public class UserHibernateService implements UserService {
                 .collect(Collectors.toList()));
         return user;
 
+    }
+
+    public UserEntity findUserEntityById(Long id){
+        UserEntity user = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(String.valueOf(id)));
+        return user;
     }
 
 

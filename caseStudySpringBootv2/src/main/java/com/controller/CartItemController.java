@@ -64,19 +64,22 @@ public class CartItemController {
 
     @PostMapping
     public ResponseEntity createCartItem(@RequestBody String id) throws URISyntaxException {
-        /*String rxId = id.replaceAll("[^0-9]+", "");
+
+        //THIS IS WHERE I LEFT OFF. TIME TO MAKE THE ADD CART ITEMS WORK
+        String rxId = id.replaceAll("[^0-9]+", "");
         Integer intId = (Integer.valueOf(rxId));
-        logger.warn(String.valueOf(intId));
-        CartItemEntity cartItem = new CartItemEntity();
+
+        CartItemDTO savedCartItem = cartItemService.addCartItem(intId);
+        //CartItemEntity cartItem = new CartItemEntity();
         //ProductEntity productEntity = productRepo.findById(intId).get();
-        ProductDTO productDTO = productService.findById(intId);
+        //ProductDTO productDTO = productService.findById(intId);
 
-        cartItem.setProduct(productEntity);
-        cartItem.setQuantity(1);
+        //cartItem.setProduct(productEntity);
+        //cartItem.setQuantity(1);
 
-        CartItemEntity savedCartItem = cartItemRepository.save(cartItem);
-        return ResponseEntity.created(new URI("/cartItemEntities" + savedCartItem.getId())).body(savedCartItem);*/
-        return null;
+        //CartItemEntity savedCartItem = cartItemRepository.save(cartItem);
+        return ResponseEntity.created(new URI("/cartItemEntities" + savedCartItem.getId())).body(savedCartItem);
+        //return null;
     }
 
     @PutMapping("/{id}")

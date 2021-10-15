@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/users").authenticated() USE THIS TO PUT PAGES BEHIND LOG IN
                 .antMatchers("/login", "/users").permitAll()
                 .antMatchers("/products").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/cart").hasAuthority("ROLE_USER")
                 //.and()
                 //.httpBasic()
                 .and()
