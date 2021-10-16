@@ -27,6 +27,19 @@ function ShoppingCart(){
 
     const deleteFromCart = (id) => {
         console.log(id)
+        axios(`cartitem`, {
+                method: 'DELETE',
+                params: {
+                  id: id
+                },
+                headers: {
+
+                    'X-XSRF-TOKEN': csrfToken
+                }
+            }
+        ).then((response) => {
+            console.log("yo")
+        })
     }
 
 

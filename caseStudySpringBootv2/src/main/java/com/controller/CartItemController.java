@@ -92,8 +92,8 @@ public class CartItemController {
         return ResponseEntity.ok(currentCartItem);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteCartItem(@PathVariable Integer id) {
+    @DeleteMapping
+    public ResponseEntity deleteCartItem(@RequestParam Integer id) {
         cartItemService.deleteById(id);
         return ResponseEntity.ok().build();
     }
