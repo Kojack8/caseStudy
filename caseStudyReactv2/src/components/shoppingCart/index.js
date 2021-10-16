@@ -29,24 +29,37 @@ function ShoppingCart(){
 
 
     return (
-        <div>
+        <div className="Cart">
+            <div>
             Your Shopping Cart:
-            { cartItems.length !== 0 ?
-                <ul>
-                    {cartItems.map((items, i) => {
-                        return (
-                            <ol key={i}>
-                                {items.map((subItems, sI) => {
-                                    return <li key={sI}> {subItems.product} + {subItems.quantity} </li>
-                                })}
+                { cartItems.length !== 0 ?
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>Product</td>
+                            <td>Quantity</td>
+                        </tr>
+                        </thead>
 
-                            </ol>
-                        )
-                    })}
-                </ul>
-                : "Your cart is empty"}
-            {/* {users.hits.map(user => <div> {user[1].name}</div>)} */}
-
+                        {cartItems.map((items, i) => {
+                            return (
+                                <React.Fragment key={i}>
+                                    {items.map((subItems, sI) => {
+                                        //return <li key={sI}> {subItems.product} + {subItems.quantity} </li>
+                                        return(
+                                            <tr key={sI}>
+                                                <td>{subItems.product}</td>
+                                                <td>{subItems.quantity}</td>
+                                            </tr>
+                                        )
+                                    })}
+                                </React.Fragment>
+                            )
+                        })
+                        }
+                    </table>
+                : null}
+            </div>
         </div>
     )
 

@@ -70,37 +70,38 @@ const Inventory = () => {
             </Form>
             <br/>
 
-            <table>
-                <thead>
-                <tr>
-                    <td>Name</td>
-                    <td>Description</td>
-                    <td>Stock</td>
-                    <td>Price</td>
-                    <td>Last Update</td>
-                    <td>Add to cart</td>
-                </tr>
-                </thead>
+
             { products !== "" ?
+                <table>
+                    <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Description</td>
+                        <td>Stock</td>
+                        <td>Price</td>
+                        <td>Last Update</td>
+                        <td>Add to cart</td>
+                    </tr>
+                    </thead>
                 <tbody>
-                {products.map((items, i) => {
-                    return (
-                        <tr key={i}>
-                            <td>{items.name}</td>
-                            <td>{items.description}</td>
-                            <td>{items.stock}</td>
-                            <td>{items.price}</td>
-                            <td>{items.updatedDate}</td>
-                            <td>
-                                <button onClick={() => addToCart(items.id)}> Add </button>
-                            </td>
-                        </tr>
-                    )
-                })
-                }
-                </tbody>
+                    {products.map((items, i) => {
+                        return (
+                            <tr key={i}>
+                                <td>{items.name}</td>
+                                <td>{items.description}</td>
+                                <td>{items.stock}</td>
+                                <td>{items.price}</td>
+                                <td>{items.updatedDate}</td>
+                                <td>
+                                    <button onClick={() => addToCart(items.id)}> Add </button>
+                                </td>
+                            </tr>
+                        )
+                    })
+                    }
+                    </tbody>
+                </table>
             : null }
-            </table>
         </div>
     )
 }
