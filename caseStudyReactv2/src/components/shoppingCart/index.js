@@ -25,6 +25,10 @@ function ShoppingCart(){
         })
     }, [])
 
+    const deleteFromCart = (id) => {
+        console.log(id)
+    }
+
 
 
 
@@ -44,15 +48,20 @@ function ShoppingCart(){
                         {cartItems.map((items, i) => {
                             return (
                                 <React.Fragment key={i}>
-                                    {items.map((subItems, sI) => {
-                                        //return <li key={sI}> {subItems.product} + {subItems.quantity} </li>
-                                        return(
-                                            <tr key={sI}>
-                                                <td>{subItems.product}</td>
-                                                <td>{subItems.quantity}</td>
-                                            </tr>
-                                        )
-                                    })}
+                                    <tbody>
+                                        {items.map((subItems, sI) => {
+                                            //return <li key={sI}> {subItems.product} + {subItems.quantity} </li>
+                                            return(
+                                                <tr key={sI}>
+                                                    <td>{subItems.product}</td>
+                                                    <td>{subItems.quantity}</td>
+                                                    <td>
+                                                        <button onClick={() => deleteFromCart(subItems.id)}> Delete </button>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
                                 </React.Fragment>
                             )
                         })
