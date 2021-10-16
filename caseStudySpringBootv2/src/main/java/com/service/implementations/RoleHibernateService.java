@@ -50,7 +50,7 @@ public class RoleHibernateService implements RoleService {
 
         roleDTO.setUsers(roleEntity.getUsers()
                 .stream()
-                .map(user -> userService.convertToUserDTO(user))
+                .map(user -> user.getId())
                 .collect(Collectors.toList()));
 
 
@@ -63,7 +63,7 @@ public class RoleHibernateService implements RoleService {
         role.setName(roleDTO.getName());
         role.setUsers(roleDTO.getUsers()
                 .stream()
-                .map(user -> userService.convertToUserEntity(user))
+                .map(user -> userService.findUserEntityById(user))
                 .collect(Collectors.toList()));
 
         return role;

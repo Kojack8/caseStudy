@@ -8,10 +8,10 @@ import java.sql.Timestamp;
 public class CartItemDTO {
 
     private Integer id;
-    private ProductDTO product;
+    private String productName;
     private Integer quantity;
     private Timestamp updatedDate;
-    private ShoppingCartDTO shoppingCartDTO;
+    private Integer shoppingCartId;
 
     public CartItemDTO() {
     }
@@ -24,12 +24,12 @@ public class CartItemDTO {
         this.id = id;
     }
 
-    public ProductDTO getProduct() {
-        return product;
+    public String getProduct() {
+        return productName;
     }
 
-    public void setProduct(ProductDTO product) {
-        this.product = product;
+    public void setProduct(String productName) {
+        this.productName = productName;
     }
 
     public Integer getQuantity() {
@@ -48,11 +48,11 @@ public class CartItemDTO {
         this.updatedDate = updatedDate;
     }
 
-    public ShoppingCartDTO getShoppingCartDTO() {
-        return shoppingCartDTO;
+    public Integer getShoppingCartId() {
+        return shoppingCartId;
     }
 
-    public void setShoppingCartDTO(ShoppingCartDTO shoppingCartDTO) {
-        this.shoppingCartDTO = shoppingCartDTO;
+    public void setShoppingCartId(Integer shoppingCartId) {
+        this.shoppingCartId = shoppingCartId;
     }
 }

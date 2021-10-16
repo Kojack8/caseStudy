@@ -10,6 +10,8 @@ public interface ShoppingCartService {
 
     ShoppingCartDTO findByUserEntity(UserEntity userEntity);
 
+    ShoppingCartEntity findShoppingCartEntityById(int id);
+
     ShoppingCartEntity findCartEntityByUserID(Long id);
 
     ShoppingCartDTO convertToShoppingCartDTO(ShoppingCartEntity shoppingCartEntity);

@@ -8,7 +8,7 @@ public class RoleDTO {
 
     private Long id;
     private String name;
-    private Collection<UserDTO> users;
+    private Collection<Long> userIDs;
 
     public RoleDTO() {
     }
@@ -29,11 +29,11 @@ public class RoleDTO {
         this.name = name;
     }
 
-    public Collection<UserDTO> getUsers() {
-        return users;
+    public Collection<Long> getUsers() {
+        return userIDs;
     }
 
-    public void setUsers(Collection<UserDTO> users) {
-        this.users = users;
+    public void setUsers(Collection<Long> userIDs) {
+        this.userIDs = userIDs;
     }
 }

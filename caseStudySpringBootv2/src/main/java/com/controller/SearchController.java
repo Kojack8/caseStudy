@@ -24,7 +24,7 @@ public class SearchController {
 
     @GetMapping
     public List<ProductDTO> getProducts(@RequestParam (required = false) String name){
-        if (name.equals("") || name.equals(null)) {
+        if (name.equals("") || name == null) {
             //return productRepository.findAll();
             return productService.findAllProducts();
         }

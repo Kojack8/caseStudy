@@ -15,14 +15,7 @@ const Inventory = () => {
     const [products, setProducts] = useState("");
 
 
-    useEffect(() => {
-        //This logs the new XSRF-TOKEN after a user logs out and is not related to the search function
-        axios({ url: `${baseURL}`,
-                method: 'GET',
-            }
-        ).then()
-        .catch()
-    }, [])
+
 
     const handleSubmit = (event) => {
         event.preventDefault();

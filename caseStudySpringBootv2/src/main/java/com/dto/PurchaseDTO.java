@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 public class PurchaseDTO {
 
     private Long id;
-    private UserDTO user;
-    private ProductDTO product;
+    private Long userId;
+    private Integer productId;
     private LocalDateTime purchasedAt;
 
     public PurchaseDTO() {
@@ -23,20 +23,20 @@ public class PurchaseDTO {
         this.id = id;
     }
 
-    public UserDTO getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(UserDTO user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public ProductDTO getProduct() {
-        return product;
+    public Integer getProductId() {
+        return productId;
     }
 
-    public void setProduct(ProductDTO product) {
-        this.product = product;
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public LocalDateTime getPurchasedAt() {

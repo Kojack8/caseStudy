@@ -36,6 +36,11 @@ public class PurchaseHibernateService implements PurchaseService {
         return convertToPurchaseDTO(purchase);
     }
 
+    public PurchaseEntity findPurchaseEntityById(Long id){
+        PurchaseEntity purchase = purchaseRepository.findById(id).orElseThrow(RuntimeException::new);
+        return purchase;
+    }
+
     public List<PurchaseDTO> findAllPurchases() {
         return ((List<PurchaseEntity>) purchaseRepository
                 .findAll())
@@ -47,10 +52,10 @@ public class PurchaseHibernateService implements PurchaseService {
     public PurchaseDTO convertToPurchaseDTO(PurchaseEntity purchaseEntity) {
         PurchaseDTO purchaseDTO = new PurchaseDTO();
         purchaseDTO.setId(purchaseEntity.getId());
-        UserDTO user = userService.convertToUserDTO(purchaseEntity.getUser());
-        purchaseDTO.setUser(user);
-        ProductDTO product = productService.convertToProductDTO(purchaseEntity.getProduct());
-        purchaseDTO.setProduct(product);
+        //UserDTO user = userService.convertToUserDTO(purchaseEntity.getUser());
+        purchaseDTO.setUserId(purchaseEntity.getUser().getId());
+        //ProductDTO product = productService.convertToProductDTO(purchaseEntity.getProduct());
+        purchaseDTO.setProductId(purchaseEntity.getProduct().getId());
         purchaseDTO.setPurchasedAt(purchaseEntity.getPurchasedAt());
 
         return purchaseDTO;
@@ -59,10 +64,10 @@ public class PurchaseHibernateService implements PurchaseService {
     public PurchaseEntity convertToPurchaseEntity(PurchaseDTO purchaseDTO) {
         PurchaseEntity purchase = new PurchaseEntity();
         purchase.setId(purchaseDTO.getId());
-        UserEntity user = userService.convertToUserEntity(purchaseDTO.getUser());
-        purchase.setUser(user);
-        ProductEntity product = productService.convertToEntity(purchaseDTO.getProduct());
-        purchase.setProduct(product);
+        //UserEntity user = userService.convertToUserEntity(purchaseDTO.getUser());
+        purchase.setUser(userService.findUserEntityById(purchaseDTO.getUserId()));
+        //ProductEntity product = productService.convertToEntity(purchaseDTO.getProduct());
+        purchase.setProduct(productService.findProductEntityById(purchaseDTO.getProductId()));
         purchase.setPurchasedAt(purchaseDTO.getPurchasedAt());
 
         return purchase;

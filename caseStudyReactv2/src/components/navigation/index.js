@@ -22,6 +22,7 @@ const Navigation = ({username}) => {
             <ul>
                 <li><NavLink exact activeClassName="current" to='/'>Home</NavLink></li>
                 <li><NavLink exact activeClassName="current" to='/inventory'>Inventory</NavLink></li>
+                <li><NavLink exact activeClassName="current" to='/cart'>Shopping Cart</NavLink></li>
                 <li><NavLink exact activeClassName="current" to='/logout'>Logout</NavLink></li>
             </ul>
         </nav>

@@ -9,6 +9,8 @@ public interface CartItemService {
 
     CartItemDTO findById(int id);
 
+    CartItemEntity findCartItemEntityById(int id);
+
     List<CartItemDTO> findByUserId(long id);
 
     List<CartItemDTO> findAllCartItems();

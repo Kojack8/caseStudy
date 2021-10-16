@@ -18,8 +18,8 @@ public class ProductDTO {
     private Integer stock;
     private Timestamp updatedDate;
     private Double price;
-    private List<PurchaseDTO> purchases;
-    private List<CartItemDTO> carts;
+    private List<Long> purchaseIds;
+    private List<Integer> cartItemIds;
 
     public ProductDTO() {
     }
@@ -72,19 +72,19 @@ public class ProductDTO {
         this.price = price;
     }
 
-    public List<PurchaseDTO> getPurchases() {
-        return purchases;
+    public List<Long> getPurchaseIds() {
+        return purchaseIds;
     }
 
-    public void setPurchases(List<PurchaseDTO> purchases) {
-        this.purchases = purchases;
+    public void setPurchaseIds(List<Long> purchaseIds) {
+        this.purchaseIds = purchaseIds;
     }
 
-    public List<CartItemDTO> getCarts() {
-        return carts;
+    public List<Integer> getCartItemIds() {
+        return cartItemIds;
     }
 
-    public void setCarts(List<CartItemDTO> carts) {
-        this.carts = carts;
+    public void setCartItemIds(List<Integer> cartItemIds) {
+        this.cartItemIds = cartItemIds;
     }
 }

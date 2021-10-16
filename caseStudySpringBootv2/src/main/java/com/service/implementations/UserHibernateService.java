@@ -36,6 +36,7 @@ public class UserHibernateService implements UserService {
         return convertToUserDTO(user);
     }
 
+
     public List<UserDTO> findAllUsers() {
         return ((List<UserEntity>) userRepository
                 .findAll())

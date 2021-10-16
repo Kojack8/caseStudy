@@ -9,6 +9,8 @@ public interface PurchaseService {
 
     PurchaseDTO findPurchaseById(Long id);
 
+    PurchaseEntity findPurchaseEntityById(Long id);
+
     List<PurchaseDTO> findAllPurchases();
 
     PurchaseDTO convertToPurchaseDTO(PurchaseEntity purchaseEntity);

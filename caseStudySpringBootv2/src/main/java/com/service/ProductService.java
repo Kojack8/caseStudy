@@ -7,17 +7,19 @@ import java.util.List;
 
 public interface ProductService {
 
-    public ProductDTO findById(Integer id);
+    ProductDTO findById(Integer id);
 
-    public ProductDTO findByName(String name);
+    ProductDTO findByName(String name);
 
-    public List<ProductDTO> findAllProducts();
+    List<ProductDTO> findAllProducts();
 
-    public ProductDTO convertToProductDTO(ProductEntity product);
+    ProductEntity findProductEntityById(Integer id);
 
-    public ProductEntity convertToEntity(ProductDTO productDTO);
+    ProductDTO convertToProductDTO(ProductEntity product);
 
-    public ProductDTO save(ProductDTO productDTO);
+    ProductEntity convertToEntity(ProductDTO productDTO);
+
+    ProductDTO save(ProductDTO productDTO);
 
     void deleteById(Integer id);
 }

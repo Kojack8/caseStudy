@@ -48,6 +48,11 @@ public class CartItemHibernateService implements CartItemService {
         return convertToCartItemDTO(cartItem);
     }
 
+    public CartItemEntity findCartItemEntityById(int id){
+        CartItemEntity cartItem = cartItemRepository.findById(id);
+        return cartItem;
+    }
+
     public List<CartItemDTO> findByUserId(long id){
         UserDTO user = userService.findUserById(id);
         ShoppingCartDTO cart = shoppingCartService.findByUserEntity(userService.convertToUserEntity(user));
@@ -88,20 +93,20 @@ public class CartItemHibernateService implements CartItemService {
     public CartItemDTO convertToCartItemDTO(CartItemEntity cartItemEntity){
         CartItemDTO cartItemDTO = new CartItemDTO();
         cartItemDTO.setId(cartItemEntity.getId());
-        cartItemDTO.setProduct(productService.convertToProductDTO(cartItemEntity.getProduct()));
+        cartItemDTO.setProduct(cartItemEntity.getProduct().getName());
         cartItemDTO.setQuantity(cartItemEntity.getQuantity());
         cartItemDTO.setUpdatedDate(cartItemEntity.getUpdatedDate());
-        cartItemDTO.setShoppingCartDTO(shoppingCartService.convertToShoppingCartDTO(cartItemEntity.getShoppingCartEntity()));
+        cartItemDTO.setShoppingCartId(cartItemEntity.getShoppingCartEntity().getId());
 
         return cartItemDTO;
     }
 
     public CartItemEntity convertToEntity(CartItemDTO cartItemDTO){
         CartItemEntity cartItem = new CartItemEntity();
-        cartItem.setProduct(productService.convertToEntity(cartItemDTO.getProduct()));
+        cartItem.setProduct(productService.convertToEntity(productService.findByName(cartItemDTO.getProduct())));
         cartItem.setQuantity(cartItemDTO.getQuantity());
         cartItem.setUpdatedDate(cartItemDTO.getUpdatedDate());
-        cartItem.setShoppingCartEntity(shoppingCartService.convertToShoppingCartEntity(cartItemDTO.getShoppingCartDTO()));
+        cartItem.setShoppingCartEntity(shoppingCartService.findShoppingCartEntityById(cartItemDTO.getShoppingCartId()));
 
         return cartItem;
     }

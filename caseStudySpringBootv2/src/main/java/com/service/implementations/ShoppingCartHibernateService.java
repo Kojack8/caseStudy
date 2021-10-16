@@ -32,6 +32,11 @@ public class ShoppingCartHibernateService implements ShoppingCartService {
         return convertToShoppingCartDTO(shoppingCart);
     }
 
+    public ShoppingCartEntity findShoppingCartEntityById(int id){
+        ShoppingCartEntity shoppingCart = shoppingCartRepository.findById(id);
+        return shoppingCart;
+    }
+
     public ShoppingCartDTO findByUserEntity(UserEntity userEntity){
         ShoppingCartEntity cart = shoppingCartRepository.findByUserEntity(userEntity);
         ShoppingCartDTO cartDTO = convertToShoppingCartDTO(cart);
@@ -49,8 +54,8 @@ public class ShoppingCartHibernateService implements ShoppingCartService {
         ShoppingCartDTO shoppingCartDTO = new ShoppingCartDTO();
         shoppingCartDTO.setId(shoppingCartEntity.getId());
         shoppingCartDTO.setUpdatedDate(shoppingCartEntity.getUpdatedDate());
-        UserDTO user = userService.convertToUserDTO(shoppingCartEntity.getUserEntity());
-        shoppingCartDTO.setUserDTO(user);
+        Long userId = shoppingCartEntity.getUserEntity().getId();
+        shoppingCartDTO.setUserId(userId);
 
 
         return shoppingCartDTO;
@@ -60,7 +65,7 @@ public class ShoppingCartHibernateService implements ShoppingCartService {
         ShoppingCartEntity shoppingCart = new ShoppingCartEntity();
         shoppingCart.setId(shoppingCartDTO.getId());
         shoppingCart.setUpdatedDate(shoppingCartDTO.getUpdatedDate());
-        UserEntity user = userService.convertToUserEntity(shoppingCartDTO.getUserDTO());
+        UserEntity user = userService.findUserEntityById(shoppingCartDTO.getUserId());
         shoppingCart.setUserEntity(user);
 
         return shoppingCart;

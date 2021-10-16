@@ -37,7 +37,12 @@ public class ProductHibernateService implements ProductService {
     public ProductDTO findById(Integer id){
         ProductEntity product = productRepository.findById(id).orElseThrow(RuntimeException::new);
         return convertToProductDTO(product);
+    }
 
+    public ProductEntity findProductEntityById(Integer id){
+        ProductEntity product = productRepository.findById(id)
+                .orElseThrow(RuntimeException::new);
+        return product;
     }
 
     public List<ProductDTO> findAllProducts() {
@@ -56,13 +61,13 @@ public class ProductHibernateService implements ProductService {
         productDTO.setStock(product.getStock());
         productDTO.setUpdatedDate(product.getUpdatedDate());
         productDTO.setPrice(product.getPrice());
-        productDTO.setPurchases(product.getPurchases()
+        productDTO.setPurchaseIds(product.getPurchases()
                 .stream()
-                .map(purchases -> purchaseService.convertToPurchaseDTO(purchases))
+                .map(purchases -> purchases.getId())
                 .collect(Collectors.toList()));
-        productDTO.setCarts(product.getCarts()
+        productDTO.setCartItemIds(product.getCarts()
                 .stream()
-                .map(cartItems -> cartItemService.convertToCartItemDTO(cartItems))
+                .map(cartItems -> cartItems.getId())
                 .collect(Collectors.toList()));
 
 
@@ -76,13 +81,13 @@ public class ProductHibernateService implements ProductService {
         product.setStock(productDTO.getStock());
         product.setUpdatedDate(productDTO.getUpdatedDate());
         product.setPrice(productDTO.getPrice());
-        product.setPurchases(productDTO.getPurchases()
+        product.setPurchases(productDTO.getPurchaseIds()
                 .stream()
-                .map(purchases -> purchaseService.convertToPurchaseEntity(purchases))
+                .map(purchases -> purchaseService.findPurchaseEntityById(purchases))
                 .collect(Collectors.toList()));
-        product.setCarts(productDTO.getCarts()
+        product.setCarts(productDTO.getCartItemIds()
                 .stream()
-                .map(cartItems -> cartItemService.convertToEntity(cartItems))
+                .map(cartItems -> cartItemService.findCartItemEntityById(cartItems))
                 .collect(Collectors.toList()));
 
         return product;
