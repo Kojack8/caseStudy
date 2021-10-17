@@ -12,6 +12,8 @@ public interface ShoppingCartService {
 
     ShoppingCartEntity findShoppingCartEntityById(int id);
 
+    ShoppingCartDTO findCartDTOByUserId(Long id);
+
     ShoppingCartEntity findCartEntityByUserID(Long id);
 
     ShoppingCartDTO convertToShoppingCartDTO(ShoppingCartEntity shoppingCartEntity);

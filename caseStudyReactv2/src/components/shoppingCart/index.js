@@ -51,6 +51,21 @@ function ShoppingCart(){
         setShowModal(data);
     }
 
+    const finalCheckOut = () => {
+        axios(`purchase`, {
+                method: 'POST',
+                params: {
+                },
+                headers: {
+
+                    'X-XSRF-TOKEN': csrfToken
+                }
+            }
+        ).then((response) => {
+            console.log("yo")
+        })
+    }
+
 
 
 
@@ -85,6 +100,7 @@ function ShoppingCart(){
                                             )
                                         })}
                                     </tbody>
+                                    <button onClick={() => finalCheckOut()}> Check Out </button>
                                 </React.Fragment>
                             )
                         })

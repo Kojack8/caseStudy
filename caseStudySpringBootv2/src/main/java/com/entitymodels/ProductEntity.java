@@ -24,8 +24,8 @@ public class ProductEntity {
     @Column(name = "stock", nullable = false)
     private Integer stock;
 
-    @Column(name = "updated_date", nullable = false)
-    private Timestamp updatedDate = new Timestamp(System.currentTimeMillis());
+    @Column(name = "updated_date", nullable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Timestamp updatedDate;
 
     @Column(name = "price", nullable = false)
     private Double price;

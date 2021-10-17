@@ -19,8 +19,8 @@ public class CartItemEntity {
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-    @Column(name = "updated_date", nullable = false)
-    private Timestamp updatedDate = new Timestamp(System.currentTimeMillis());
+    @Column(name = "updated_date", nullable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Timestamp updatedDate;
 
     @OneToOne
     @JoinColumn(name = "shopping_cart_id", referencedColumnName = "id")

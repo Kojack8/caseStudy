@@ -11,6 +11,9 @@ public class PurchaseEntity {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "quantity", nullable = false)
+    private Integer quantity;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
@@ -19,6 +22,7 @@ public class PurchaseEntity {
     @JoinColumn(name = "product_id")
     private ProductEntity product;
 
+    @Column(name = "purchased_at", nullable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime purchasedAt;
 
     public Long getId() {
@@ -51,5 +55,13 @@ public class PurchaseEntity {
 
     public void setPurchasedAt(LocalDateTime purchasedAt) {
         this.purchasedAt = purchasedAt;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }

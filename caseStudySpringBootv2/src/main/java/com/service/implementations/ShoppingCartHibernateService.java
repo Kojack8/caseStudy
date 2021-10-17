@@ -43,6 +43,12 @@ public class ShoppingCartHibernateService implements ShoppingCartService {
         return cartDTO;
     }
 
+    public ShoppingCartDTO findCartDTOByUserId(Long id){
+        ShoppingCartEntity cart = shoppingCartRepository.findByUserEntity(userService.findUserEntityById(id));
+        ShoppingCartDTO cartDTO = convertToShoppingCartDTO(cart);
+        return cartDTO;
+    }
+
     public ShoppingCartEntity findCartEntityByUserID(Long id){
         UserEntity user = userService.findUserEntityById(id);
         ShoppingCartEntity cart = shoppingCartRepository.findByUserEntity(user);

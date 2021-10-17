@@ -16,8 +16,8 @@ public class ShoppingCartEntity {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "updated_date", nullable = false)
-    private Timestamp updatedDate = new Timestamp(System.currentTimeMillis());
+    @Column(name = "updated_date", nullable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Timestamp updatedDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

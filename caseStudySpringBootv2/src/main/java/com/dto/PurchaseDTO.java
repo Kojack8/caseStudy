@@ -9,6 +9,7 @@ public class PurchaseDTO {
 
     private Long id;
     private Long userId;
+    private Integer quantity;
     private Integer productId;
     private LocalDateTime purchasedAt;
 
@@ -45,5 +46,13 @@ public class PurchaseDTO {
 
     public void setPurchasedAt(LocalDateTime purchasedAt) {
         this.purchasedAt = purchasedAt;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }
