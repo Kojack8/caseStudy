@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import {Form} from "react-bootstrap";
 import Cookies from "js-cookie";
 import "./inventory.css"
+import AddToCartModal from "../addToCartModal";
 
 
 const csrfToken=  Cookies.get('XSRF-TOKEN');
@@ -13,6 +14,8 @@ const Inventory = () => {
 
     const [searchName, setSearchName] = useState("");
     const [products, setProducts] = useState("");
+    const [selectedProduct, setSelectedProduct] = useState([]);
+    const [showModal, setShowModal] = useState(false);
 
 
 
@@ -36,9 +39,10 @@ const Inventory = () => {
         })
     }
 
-    const addToCart = (id) => {
-
-        axios({
+    const addToCart = (items) => {
+        setShowModal(true);
+        setSelectedProduct(items)
+        /*axios({
 
             method: 'POST',
             url: "cartitem",
@@ -52,11 +56,14 @@ const Inventory = () => {
             console.log(res);
         }).catch((err) => {
             console.log(err);
-        })
+        })*/
     }
 
     return (
-        <div className="InvPage">
+
+        <div className="inv-page">
+            {showModal ? <AddToCartModal  item={selectedProduct}/> : null}
+
             <h2>Hey it's me the inventory page</h2>
             <Form className="Search" onSubmit={handleSubmit}>
                 <input type="text"
@@ -93,7 +100,7 @@ const Inventory = () => {
                                 <td>{items.price}</td>
                                 <td>{items.updatedDate}</td>
                                 <td>
-                                    <button onClick={() => addToCart(items.id)}> Add </button>
+                                    <button onClick={() => addToCart(items)}> Add </button>
                                 </td>
                             </tr>
                         )
