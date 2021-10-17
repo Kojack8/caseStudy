@@ -1,12 +1,16 @@
 .modal-content{
     background-color: #fefefe;
-    margin: auto;
+   margin: 10%;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    height: 25%;
+    display: flex;
+
 }
 
 .checkout-modal{
+    display: flex;
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     padding-top: 100px; /* Location of the box */
@@ -17,5 +21,10 @@
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.exit-button{
+    margin-left:auto;
+    width: 5%;
 }
 

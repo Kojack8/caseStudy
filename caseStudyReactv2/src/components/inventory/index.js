@@ -17,7 +17,9 @@ const Inventory = () => {
     const [selectedProduct, setSelectedProduct] = useState([]);
     const [showModal, setShowModal] = useState(false);
 
-
+    const modalCallBackData = (data) => {
+        setShowModal(data);
+    }
 
 
     const handleSubmit = (event) => {
@@ -62,7 +64,7 @@ const Inventory = () => {
     return (
 
         <div className="inv-page">
-            {showModal ? <AddToCartModal  item={selectedProduct}/> : null}
+            {showModal ? <AddToCartModal  item={selectedProduct} callBack={modalCallBackData}/> : null}
 
             <h2>Hey it's me the inventory page</h2>
             <Form className="Search" onSubmit={handleSubmit}>

@@ -63,13 +63,14 @@ public class CartItemController {
 
 
     @PostMapping
-    public ResponseEntity createCartItem(@RequestBody String id) throws URISyntaxException {
+    public ResponseEntity createCartItem(@RequestParam Integer id, @RequestParam Integer quantity) throws URISyntaxException {
 
         //THIS IS WHERE I LEFT OFF. TIME TO MAKE THE ADD CART ITEMS WORK
-        String rxId = id.replaceAll("[^0-9]+", "");
-        Integer intId = (Integer.valueOf(rxId));
+        //String rxId = id.replaceAll("[^0-9]+", "");
+        //Integer intId = (Integer.valueOf(id));
+        logger.warn(String.valueOf(quantity));
 
-        CartItemDTO savedCartItem = cartItemService.addCartItem(intId);
+        CartItemDTO savedCartItem = cartItemService.addCartItem(id);
         //CartItemEntity cartItem = new CartItemEntity();
         //ProductEntity productEntity = productRepo.findById(intId).get();
         //ProductDTO productDTO = productService.findById(intId);
