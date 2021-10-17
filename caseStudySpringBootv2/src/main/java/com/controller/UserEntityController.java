@@ -73,6 +73,7 @@ public class UserEntityController {
                     .orElseThrow(() -> new EntityNotFoundException(String.valueOf(savedUser)));
             ShoppingCartEntity cart = new ShoppingCartEntity();
             cart.setUserEntity(savedEntity);
+
             shoppingCartRepository.save(cart);
 
 

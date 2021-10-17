@@ -16,7 +16,7 @@ public class ShoppingCartEntity {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "updated_date", nullable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "updated_date", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp updatedDate;
 
     @ManyToOne
