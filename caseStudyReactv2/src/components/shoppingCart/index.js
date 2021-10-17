@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react"
 import axios from 'axios';
 import Cookies from "js-cookie";
+import DeleteFromCartModal from "../deleteFromCartModal";
 
 
 const baseURL = "cart"
@@ -10,6 +11,8 @@ const csrfToken=  Cookies.get('XSRF-TOKEN');
 function ShoppingCart(){
 
     const [cartItems, setCartItems] = useState([] );
+    const [showModal, setShowModal] = useState(false);
+    const [selectedItem, setSelectedItem] = useState([]);
 
     useEffect(() => {
         axios(`${baseURL}`, {
@@ -25,8 +28,10 @@ function ShoppingCart(){
         })
     }, [])
 
-    const deleteFromCart = (id) => {
-        console.log(id)
+    const deleteFromCart = (item) => {
+        setShowModal(true);
+        setSelectedItem(item);
+        /*console.log(id)
         axios(`cartitem`, {
                 method: 'DELETE',
                 params: {
@@ -39,7 +44,11 @@ function ShoppingCart(){
             }
         ).then((response) => {
             console.log("yo")
-        })
+        })*/
+    }
+
+    const modalCallBackData = (data) => {
+        setShowModal(data);
     }
 
 
@@ -47,6 +56,7 @@ function ShoppingCart(){
 
     return (
         <div className="Cart">
+            {showModal ? <DeleteFromCartModal item={selectedItem} callBack={modalCallBackData} /> : null}
             <div>
             Your Shopping Cart:
                 { cartItems.length !== 0 ?
@@ -69,7 +79,7 @@ function ShoppingCart(){
                                                     <td>{subItems.product}</td>
                                                     <td>{subItems.quantity}</td>
                                                     <td>
-                                                        <button onClick={() => deleteFromCart(subItems.id)}> Delete </button>
+                                                        <button onClick={() => deleteFromCart(subItems)}> Remove From Cart </button>
                                                     </td>
                                                 </tr>
                                             )

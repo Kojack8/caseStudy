@@ -70,7 +70,7 @@ public class CartItemController {
         //Integer intId = (Integer.valueOf(id));
         logger.warn(String.valueOf(quantity));
 
-        CartItemDTO savedCartItem = cartItemService.addCartItem(id);
+        CartItemDTO savedCartItem = cartItemService.addCartItem(id, quantity);
         //CartItemEntity cartItem = new CartItemEntity();
         //ProductEntity productEntity = productRepo.findById(intId).get();
         //ProductDTO productDTO = productService.findById(intId);

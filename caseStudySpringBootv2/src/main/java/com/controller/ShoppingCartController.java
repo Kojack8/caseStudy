@@ -50,7 +50,7 @@ public class ShoppingCartController {
             Long userID = userPrincipal.getId();
             //UserDTO user = userService.findUserById(userID);
             //ShoppingCartDTO cart = shoppingCartService.findByUserEntity(userService.convertToUserEntity(user));
-            List<CartItemDTO> items = cartItemService.findByUserId(userID);
+            List<CartItemDTO> items = cartItemService.findAllCartItemsByUserId(userID);
             return items;
         } else {
             return null;

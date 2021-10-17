@@ -53,7 +53,7 @@ public class CartItemHibernateService implements CartItemService {
         return cartItem;
     }
 
-    public List<CartItemDTO> findByUserId(long id){
+    public List<CartItemDTO> findAllCartItemsByUserId(long id){
         UserDTO user = userService.findUserById(id);
         ShoppingCartDTO cart = shoppingCartService.findByUserEntity(userService.convertToUserEntity(user));
         List<CartItemEntity> cartItems = cartItemRepository.findAllByShoppingCartEntity(shoppingCartService.convertToShoppingCartEntity(cart));
@@ -72,7 +72,7 @@ public class CartItemHibernateService implements CartItemService {
                 .collect(Collectors.toList());
     }
 
-    public CartItemDTO addCartItem(int id){
+    public CartItemDTO addCartItem(int id, int quantity){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             CustomUserDetails userPrincipal = (CustomUserDetails) authentication.getPrincipal();
@@ -82,7 +82,7 @@ public class CartItemHibernateService implements CartItemService {
             cartItem.setProduct(productEntity);
             ShoppingCartEntity cart = shoppingCartService.findCartEntityByUserID(userID);
             cartItem.setShoppingCartEntity(cart);
-            cartItem.setQuantity(1);
+            cartItem.setQuantity(quantity);
             CartItemEntity savedCartItem = cartItemRepository.save(cartItem);
             return convertToCartItemDTO(savedCartItem);
         }
