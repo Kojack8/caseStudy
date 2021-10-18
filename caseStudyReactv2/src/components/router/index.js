@@ -16,6 +16,7 @@ const Router = (props) => {
 
     const [username, setUsername] = useState("");
 
+
     useEffect(() => {
         axios({
             method: 'GET',
@@ -53,7 +54,9 @@ const Router = (props) => {
     return (
         <Switch>
             <Route exact path='/' component={Home}/>
-            <Route exact path='/inventory' component={Inventory}/>
+            <Route exact path='/inventory'>
+                <Inventory auth={props.auth}/>
+            </Route>
 
             <Route exact path='/login'>
                 <Login callBack={loginCallBackData}/>

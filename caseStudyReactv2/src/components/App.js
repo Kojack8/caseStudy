@@ -12,7 +12,7 @@ const csrfToken = Cookies.get('XSRF-TOKEN');
 const App = () => {
 
     const [username, setUsername] = useState("");
-    const [auth, setAuth] = useState("");
+    const [auth, setAuth] = useState([]);
 
     useEffect(() => {
         axios({
@@ -35,8 +35,9 @@ const App = () => {
 
     return (
         <div className='app'>
-            { (auth !== "") ?
+            { (auth.length !== 0) ?
             <div>
+
             {username} +
             {auth.map((items, i) => {
                 return (
@@ -52,7 +53,8 @@ const App = () => {
             <h1>Video Production Shopping Service</h1>
 
             <Navigation username={username}/>
-            <Router callBack={userCallBackData} />
+            <Router callBack={userCallBackData}
+                    auth={auth}/>
 
 
         </div>

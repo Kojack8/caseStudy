@@ -33,6 +33,7 @@ const ShoppingCart = () => {
             console.log(cartItems);
 
         })
+        // eslint-disable-next-line
     }, [])
 
     const deleteFromCart = (item) => {
@@ -70,8 +71,8 @@ const ShoppingCart = () => {
             {showPayWithCard ? <PayWithCard callBack={finalCheckOut}/> : null}
 
             <div>
-            Your Shopping Cart:
-                { cartItems.length === 0 || cartItems[0].length === 0 ? null:
+                Your shopping cart:
+                { cartItems.length === 0 || cartItems[0].length === 0 ? <div> Currently empty!</div> :
                     <table>
                         <thead>
                         <tr>

@@ -18,6 +18,7 @@ const Navigation = ({username}) => {
         );
     }
     return (
+
         <nav>
             <ul>
                 <li><NavLink exact activeClassName="current" to='/'>Home</NavLink></li>

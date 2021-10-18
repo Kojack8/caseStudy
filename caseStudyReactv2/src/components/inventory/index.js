@@ -10,12 +10,21 @@ import AddToCartModal from "../addToCartModal";
 const csrfToken=  Cookies.get('XSRF-TOKEN');
 const baseURL = "search"
 
-const Inventory = () => {
+const Inventory = (props) => {
 
     const [searchName, setSearchName] = useState("");
     const [products, setProducts] = useState("");
     const [selectedProduct, setSelectedProduct] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    useEffect(() => {
+        props.auth.forEach(element => {
+            if(element.authority === "ROLE_ADMIN"){
+                setIsAdmin(true);
+            }
+        })
+    })
 
     const modalCallBackData = (data) => {
         setShowModal(data);
@@ -64,6 +73,15 @@ const Inventory = () => {
     return (
 
         <div className="inv-page">
+            {props.auth.map((items, i) => {
+                return (
+                    <div key={i}>
+                        <div>{items.authority}</div>
+                    </div>
+                )
+            })
+            }
+
             {showModal ? <AddToCartModal  item={selectedProduct} callBack={modalCallBackData}/> : null}
 
             <h2>Hey it's me the inventory page</h2>
@@ -99,7 +117,7 @@ const Inventory = () => {
                                 <td>{items.description}</td>
                                 { items.stock !==0 ?
                                     <td>{items.stock}</td>
-                                : <td class="no-stock"> Out Of Stock</td>}
+                                : <td className="no-stock"> Out Of Stock</td>}
                                 <td>{items.price}</td>
                                 <td>
                                     <button onClick={() => addToCart(items)}> Add </button>
@@ -111,6 +129,8 @@ const Inventory = () => {
                     </tbody>
                 </table>
             : null }
+
+            {isAdmin ? <div>"YOU'RE AN ADMIN!</div> : <div> You're just a user</div>}
         </div>
     )
 }
