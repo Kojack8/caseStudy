@@ -19,6 +19,12 @@ public interface ProductService {
 
     ProductEntity convertToEntity(ProductDTO productDTO);
 
+    ProductEntity convertToEntityWithID(ProductDTO productDTO);
+
+    void saveQuantityChange(ProductDTO productDTO);
+
+    void changeQuantity(ProductDTO productDTO);
+
     ProductDTO save(ProductDTO productDTO);
 
     void deleteById(Integer id);

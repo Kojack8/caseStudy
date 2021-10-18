@@ -93,6 +93,37 @@ public class ProductHibernateService implements ProductService {
         return product;
     }
 
+    public ProductEntity convertToEntityWithID(ProductDTO productDTO){
+        ProductEntity product = new ProductEntity();
+        product.setId(productDTO.getId());
+        product.setName(productDTO.getName());
+        product.setDescription(productDTO.getDescription());
+        product.setStock(productDTO.getStock());
+        product.setUpdatedDate(productDTO.getUpdatedDate());
+        product.setPrice(productDTO.getPrice());
+        product.setPurchases(productDTO.getPurchaseIds()
+                .stream()
+                .map(purchases -> purchaseService.findPurchaseEntityById(purchases))
+                .collect(Collectors.toList()));
+        product.setCarts(productDTO.getCartItemIds()
+                .stream()
+                .map(cartItems -> cartItemService.findCartItemEntityById(cartItems))
+                .collect(Collectors.toList()));
+
+        return product;
+    }
+
+    public void changeQuantity(ProductDTO productDTO){
+        ProductDTO originalProduct = findByName(productDTO.getName());
+        originalProduct.setStock(productDTO.getStock());
+        saveQuantityChange(originalProduct);
+    }
+
+    public void saveQuantityChange(ProductDTO productDTO){
+        ProductEntity product = convertToEntityWithID(productDTO);
+        ProductEntity savedProduct = productRepository.save(product);
+    }
+
     public ProductDTO save(ProductDTO productDTO){
         ProductEntity product = convertToEntity(productDTO);
         ProductEntity savedProduct = productRepository.save(product);

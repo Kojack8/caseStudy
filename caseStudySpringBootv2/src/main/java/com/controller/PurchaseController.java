@@ -1,12 +1,11 @@
 package com.controller;
 
-import com.dto.CartItemDTO;
-import com.dto.PurchaseDTO;
-import com.dto.PurchaseDTOProductName;
-import com.dto.ShoppingCartDTO;
+import com.dto.*;
+import com.entitymodels.ProductEntity;
 import com.entitymodels.ShoppingCartEntity;
 import com.logging.LombokLoggingController;
 import com.service.CartItemService;
+import com.service.ProductService;
 import com.service.PurchaseService;
 import com.service.ShoppingCartService;
 import com.userdetails.CustomUserDetails;
@@ -31,13 +30,15 @@ public class PurchaseController {
     private final PurchaseService purchaseService;
     private final ShoppingCartService shoppingCartService;
     private final CartItemService cartItemService;
+    private final ProductService productService;
 
     @Autowired
     public PurchaseController(PurchaseService purchaseService, ShoppingCartService shoppingCartService,
-                              CartItemService cartItemService){
+                              CartItemService cartItemService, ProductService productService){
         this.purchaseService = purchaseService;
         this.shoppingCartService = shoppingCartService;
         this.cartItemService = cartItemService;
+        this.productService = productService;
         this.logger = LoggerFactory.getLogger(LombokLoggingController.class);
     }
 
@@ -65,9 +66,19 @@ public class PurchaseController {
             //ShoppingCartDTO cart = shoppingCartService.findCartDTOByUserId(userId);
            // 1) COPY CART ITEMS FROM THE CURRENT CART INTO PURCHASE
             List<CartItemDTO> cartItems = cartItemService.findAllCartItemsByUserId(userId);
-
+            for (CartItemDTO cartItem:cartItems){
+                String productName = cartItem.getProduct();
+                if (cartItem.getQuantity() > (productService.findByName(productName).getStock())){
+                    return ResponseEntity.badRequest().build();
+                }
+            }
             List<PurchaseDTO> purchases = purchaseService.convertCartItemsToPurchase(cartItems, userId);
             purchaseService.saveMultiplePurchases(purchases);
+            for (PurchaseDTO purchase:purchases){
+                ProductDTO product = productService.findById(purchase.getProductId());
+                product.setStock(product.getStock() - purchase.getQuantity());
+                productService.changeQuantity(product);
+            }
             //2) REMOVE CART ITEMS FROM CURRENT CART
             //logger.warn(String.valueOf(savedPurchases));
 
