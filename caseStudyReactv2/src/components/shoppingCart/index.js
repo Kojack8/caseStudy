@@ -2,16 +2,22 @@ import React, {useEffect, useState} from "react"
 import axios from 'axios';
 import Cookies from "js-cookie";
 import DeleteFromCartModal from "../deleteFromCartModal";
+import PayWithCard from "../payWithCard";
+
+
 
 
 const baseURL = "cart"
 const csrfToken=  Cookies.get('XSRF-TOKEN');
 
 
+
+
 const ShoppingCart = () => {
 
     const [cartItems, setCartItems] = useState([] );
     const [showModal, setShowModal] = useState(false);
+    const [showPayWithCard, setShowPayWithCard] = useState(false);
     const [selectedItem, setSelectedItem] = useState([]);
 
     useEffect(() => {
@@ -24,6 +30,7 @@ const ShoppingCart = () => {
             }
         ).then((response) => {
             setCartItems([response.data] )
+            console.log(cartItems);
 
         })
     }, [])
@@ -39,6 +46,7 @@ const ShoppingCart = () => {
     }
 
     const finalCheckOut = () => {
+        setShowPayWithCard(false);
         axios(`purchase`, {
                 method: 'POST',
                 params: {
@@ -59,9 +67,11 @@ const ShoppingCart = () => {
     return (
         <div className="Cart">
             {showModal ? <DeleteFromCartModal item={selectedItem} callBack={modalCallBackData} /> : null}
+            {showPayWithCard ? <PayWithCard callBack={finalCheckOut}/> : null}
+
             <div>
             Your Shopping Cart:
-                { cartItems.length !== 0 ?
+                { cartItems.length === 0 || cartItems[0].length === 0 ? null:
                     <table>
                         <thead>
                         <tr>
@@ -87,12 +97,16 @@ const ShoppingCart = () => {
                                             )
                                         })}
                                     </tbody>
-                                    <button onClick={() => finalCheckOut()}> Check Out </button>
+
+
+                                    <button onClick={() => setShowPayWithCard(true)}> Pay With Card </button>
                                 </React.Fragment>
                             )
                         })}
-                    </table>
-                : null}
+                        <div>{cartItems[0].length}</div>
+                    </table>}
+
+
             </div>
         </div>
     )
