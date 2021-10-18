@@ -1,5 +1,6 @@
 package com.service.implementations;
 
+import com.dto.CartItemDTO;
 import com.dto.ProductDTO;
 import com.dto.PurchaseDTO;
 import com.dto.UserDTO;
@@ -64,6 +65,7 @@ public class PurchaseHibernateService implements PurchaseService {
     public PurchaseEntity convertToPurchaseEntity(PurchaseDTO purchaseDTO) {
         PurchaseEntity purchase = new PurchaseEntity();
         purchase.setId(purchaseDTO.getId());
+        purchase.setQuantity(purchaseDTO.getQuantity());
         //UserEntity user = userService.convertToUserEntity(purchaseDTO.getUser());
         purchase.setUser(userService.findUserEntityById(purchaseDTO.getUserId()));
         //ProductEntity product = productService.convertToEntity(purchaseDTO.getProduct());
@@ -79,6 +81,29 @@ public class PurchaseHibernateService implements PurchaseService {
         PurchaseDTO savedDTO = convertToPurchaseDTO(savedPurchase);
 
         return savedDTO;
+    }
+
+    public PurchaseDTO convertCartItemToPurchase(CartItemDTO cartItem, Long userId){
+        PurchaseDTO purchase = new PurchaseDTO();
+        purchase.setUserId(userId);
+        purchase.setQuantity(cartItem.getQuantity());
+        purchase.setProductId(productService.findByName(cartItem.getProduct()).getId());
+        return purchase;
+    }
+
+    public List<PurchaseDTO> convertCartItemsToPurchase(List<CartItemDTO> cartItems, Long userId){
+        return cartItems
+                .stream()
+                .map(cartItem -> convertCartItemToPurchase(cartItem, userId))
+                .collect(Collectors.toList());
+    }
+
+    public List<PurchaseDTO> saveMultiplePurchases(List<PurchaseDTO> purchases){
+        return purchases
+                .stream()
+                .map(this::save)
+                .collect(Collectors.toList());
+
     }
 
     public void deleteById(Long id) {

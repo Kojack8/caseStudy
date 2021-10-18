@@ -1,5 +1,6 @@
 package com.service;
 
+import com.dto.CartItemDTO;
 import com.dto.PurchaseDTO;
 import com.entitymodels.PurchaseEntity;
 
@@ -15,9 +16,13 @@ public interface PurchaseService {
 
     PurchaseDTO convertToPurchaseDTO(PurchaseEntity purchaseEntity);
 
+    List<PurchaseDTO> convertCartItemsToPurchase(List<CartItemDTO> cartItems, Long userId);
+
     PurchaseEntity convertToPurchaseEntity(PurchaseDTO purchaseDTO);
 
     PurchaseDTO save(PurchaseDTO purchaseDTO);
+
+    List<PurchaseDTO> saveMultiplePurchases(List<PurchaseDTO> purchases);
 
     void deleteById(Long id);
 

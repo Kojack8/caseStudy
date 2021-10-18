@@ -23,6 +23,8 @@ public interface CartItemService {
 
     CartItemDTO save(CartItemDTO cartItemDTO);
 
+    void deleteMultipleCartItems(List<CartItemDTO> cartItems);
+
     void deleteById(Integer id);
 
 }

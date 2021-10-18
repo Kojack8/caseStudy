@@ -18,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -54,10 +55,14 @@ public class PurchaseController {
             //ShoppingCartDTO cart = shoppingCartService.findCartDTOByUserId(userId);
            // 1) COPY CART ITEMS FROM THE CURRENT CART INTO PURCHASE
             List<CartItemDTO> cartItems = cartItemService.findAllCartItemsByUserId(userId);
+            List<PurchaseDTO> purchases = purchaseService.convertCartItemsToPurchase(cartItems, userId);
+            purchaseService.saveMultiplePurchases(purchases);
             //2) REMOVE CART ITEMS FROM CURRENT CART
-            logger.warn(String.valueOf(cartItems));
+            //logger.warn(String.valueOf(savedPurchases));
 
-            return null;
+            cartItemService.deleteMultipleCartItems(cartItems);
+
+            return ResponseEntity.ok().build();
         } else {
             return null;
         }

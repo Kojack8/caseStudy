@@ -22,7 +22,7 @@ public class PurchaseEntity {
     @JoinColumn(name = "product_id")
     private ProductEntity product;
 
-    @Column(name = "purchased_at", nullable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "purchased_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime purchasedAt;
 
     public Long getId() {

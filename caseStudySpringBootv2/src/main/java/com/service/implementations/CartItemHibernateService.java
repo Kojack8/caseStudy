@@ -6,6 +6,7 @@ import com.dto.UserDTO;
 import com.entitymodels.CartItemEntity;
 import com.entitymodels.ProductEntity;
 import com.entitymodels.ShoppingCartEntity;
+import com.logging.LombokLoggingController;
 import com.repository.CartItemRepository;
 import com.repository.ProductRepository;
 import com.service.CartItemService;
@@ -13,6 +14,8 @@ import com.service.ProductService;
 import com.service.ShoppingCartService;
 import com.service.UserService;
 import com.userdetails.CustomUserDetails;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -31,6 +34,7 @@ public class CartItemHibernateService implements CartItemService {
     private final ShoppingCartService shoppingCartService;
     private final ProductService productService;
     private final ProductRepository productRepository;
+    private final Logger logger;
 
     @Autowired
     public CartItemHibernateService(CartItemRepository cartItemRepository, UserService userService,
@@ -41,6 +45,7 @@ public class CartItemHibernateService implements CartItemService {
         this.shoppingCartService = shoppingCartService;
         this.productService = productService;
         this.productRepository = productRepository;
+        this.logger = LoggerFactory.getLogger(LombokLoggingController.class);
     }
 
     public CartItemDTO findById(int id){
@@ -117,6 +122,12 @@ public class CartItemHibernateService implements CartItemService {
         CartItemDTO savedDTO = convertToCartItemDTO(savedCartItem);
 
         return savedDTO;
+    }
+
+    public void deleteMultipleCartItems(List<CartItemDTO> cartItems){
+        cartItems
+                .stream()
+                .forEach(item -> deleteById(item.getId()));
     }
 
     public void deleteById(Integer id){
