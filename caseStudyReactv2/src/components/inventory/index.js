@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import "./inventory.css"
 import AddToCartModal from "../addToCartModal";
 import InventoryAdmin from "../inventoryAdmin";
+import DeleteWarningModal from "../deleteWarningModal";
 
 
 const csrfToken=  Cookies.get('XSRF-TOKEN');
@@ -34,6 +35,11 @@ const Inventory = (props) => {
         setShowModal(data);
     }
 
+    const warningCallBackData = (data) => {
+        setShowWarning(data);
+    }
+
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -56,18 +62,19 @@ const Inventory = (props) => {
 
     const deleteFromDataBase = (items) => {
         setShowWarning(true);
+        setSelectedProduct(items);
     }
 
     const addToCart = (items) => {
         setShowModal(true);
-        setSelectedProduct(items)
+        setSelectedProduct(items);
     }
 
     return (
 
         <div className="inv-page">
 
-
+            {showWarning ? <DeleteWarningModal item={selectedProduct} callBack={warningCallBackData}/> : null}
             {showModal ? <AddToCartModal  item={selectedProduct} callBack={modalCallBackData}/> : null}
 
             <h2>Hey it's me the inventory page</h2>
