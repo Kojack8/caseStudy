@@ -5,6 +5,7 @@ import {Form} from "react-bootstrap";
 import Cookies from "js-cookie";
 import "./inventory.css"
 import AddToCartModal from "../addToCartModal";
+import InventoryAdmin from "../inventoryAdmin";
 
 
 const csrfToken=  Cookies.get('XSRF-TOKEN');
@@ -16,14 +17,17 @@ const Inventory = (props) => {
     const [products, setProducts] = useState("");
     const [selectedProduct, setSelectedProduct] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [showWarning, setShowWarning] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
-        props.auth.forEach(element => {
-            if(element.authority === "ROLE_ADMIN"){
-                setIsAdmin(true);
-            }
-        })
+        if (props.auth.length !== 0 ) {
+            props.auth.forEach(element => {
+                if (element.authority === "ROLE_ADMIN") {
+                    setIsAdmin(true);
+                }
+            })
+        }
     })
 
     const modalCallBackData = (data) => {
@@ -50,37 +54,19 @@ const Inventory = (props) => {
         })
     }
 
+    const deleteFromDataBase = (items) => {
+        setShowWarning(true);
+    }
+
     const addToCart = (items) => {
         setShowModal(true);
         setSelectedProduct(items)
-        /*axios({
-
-            method: 'POST',
-            url: "cartitem",
-            data: ({
-                id
-            }),
-            headers: {
-                'X-XSRF-TOKEN': csrfToken
-            }
-        }).then((res) => {
-            console.log(res);
-        }).catch((err) => {
-            console.log(err);
-        })*/
     }
 
     return (
 
         <div className="inv-page">
-            {props.auth.map((items, i) => {
-                return (
-                    <div key={i}>
-                        <div>{items.authority}</div>
-                    </div>
-                )
-            })
-            }
+
 
             {showModal ? <AddToCartModal  item={selectedProduct} callBack={modalCallBackData}/> : null}
 
@@ -107,6 +93,7 @@ const Inventory = (props) => {
                         <td>Stock</td>
                         <td>Price</td>
                         <td>Add to cart</td>
+                        { isAdmin ? <td> Delete From Database</td> : null}
                     </tr>
                     </thead>
                 <tbody>
@@ -115,13 +102,14 @@ const Inventory = (props) => {
                             <tr key={i}>
                                 <td>{items.name}</td>
                                 <td>{items.description}</td>
-                                { items.stock !==0 ?
-                                    <td>{items.stock}</td>
-                                : <td className="no-stock"> Out Of Stock</td>}
+                                { items.stock !==0 ? <td>{items.stock}</td> : <td className="no-stock"> Out Of Stock</td>}
                                 <td>{items.price}</td>
                                 <td>
                                     <button onClick={() => addToCart(items)}> Add </button>
                                 </td>
+                                { isAdmin ? <td>
+                                    <button onClick={() => deleteFromDataBase(items)}> Delete</button>
+                                </td> : null}
                             </tr>
                         )
                     })
@@ -130,7 +118,7 @@ const Inventory = (props) => {
                 </table>
             : null }
 
-            {isAdmin ? <div>"YOU'RE AN ADMIN!</div> : <div> You're just a user</div>}
+            {isAdmin ? <InventoryAdmin/> : null}
         </div>
     )
 }

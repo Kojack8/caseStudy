@@ -11,7 +11,7 @@ import Cookies from 'js-cookie';
 const baseURL = "users"
 const csrfToken=  Cookies.get('XSRF-TOKEN');
 
-export default function CreateUser() {
+const CreateUser = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -54,7 +54,7 @@ export default function CreateUser() {
                 url: `${baseURL}`,
                 data: user,
                 headers: {
-                    Authorization: 'Basic ' + window.btoa('caseStudyUser:Hamster5Lobster9Lightbulb'),
+                    //Authorization: 'Basic ' + window.btoa('caseStudyUser:Hamster5Lobster9Lightbulb'),
                     'X-XSRF-TOKEN': csrfToken
                 }
             }
@@ -158,3 +158,5 @@ export default function CreateUser() {
         </div>
     );
 }
+
+export default CreateUser;

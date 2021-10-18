@@ -27,5 +27,11 @@ public interface ProductService {
 
     ProductDTO save(ProductDTO productDTO);
 
+    ProductDTO saveNew(ProductDTO productDTO);
+
+    ProductEntity createNew(ProductDTO productDTO);
+
+    ProductDTO newProductDTO(ProductEntity productEntity);
+
     void deleteById(Integer id);
 }

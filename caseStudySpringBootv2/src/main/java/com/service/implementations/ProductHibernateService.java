@@ -113,6 +113,7 @@ public class ProductHibernateService implements ProductService {
         return product;
     }
 
+
     public void changeQuantity(ProductDTO productDTO){
         ProductDTO originalProduct = findByName(productDTO.getName());
         originalProduct.setStock(productDTO.getStock());
@@ -130,6 +131,33 @@ public class ProductHibernateService implements ProductService {
         ProductDTO savedDTO = convertToProductDTO(savedProduct);
 
         return savedDTO;
+    }
+
+    public ProductDTO saveNew(ProductDTO productDTO){
+        ProductEntity product = createNew(productDTO);
+        ProductEntity savedProduct = productRepository.save(product);
+        return newProductDTO(savedProduct);
+    }
+
+    public ProductEntity createNew(ProductDTO productDTO){
+        ProductEntity product = new ProductEntity();
+        product.setName(productDTO.getName());
+        product.setDescription(productDTO.getDescription());
+        product.setStock(productDTO.getStock());
+        product.setPrice(productDTO.getPrice());
+
+        return product;
+    }
+
+    public ProductDTO newProductDTO(ProductEntity product){
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setId(product.getId());
+        productDTO.setName(product.getName());
+        productDTO.setDescription(product.getDescription());
+        productDTO.setStock(product.getStock());
+        productDTO.setUpdatedDate(product.getUpdatedDate());
+        productDTO.setPrice(product.getPrice());
+        return productDTO;
     }
 
     public void deleteById(Integer id) {

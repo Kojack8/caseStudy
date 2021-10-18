@@ -12,7 +12,7 @@ public class ProductEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "name", nullable = false, length = 50, unique = true)
@@ -24,7 +24,7 @@ public class ProductEntity {
     @Column(name = "stock", nullable = false)
     private Integer stock;
 
-    @Column(name = "updated_date", nullable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "updated_date", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp updatedDate;
 
     @Column(name = "price", nullable = false)

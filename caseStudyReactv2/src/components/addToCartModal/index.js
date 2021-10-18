@@ -62,7 +62,7 @@ const AddToCartModal = (props) => {
                                 </label>
                                 <input type="number"
                                     value={orderQuantity}
-                                    onChange={(e) => setOrderQuantity(e.target.value)}
+                                    onChange={(e) => setOrderQuantity(e.target.valueAsNumber)}
                                     min={0}
                                     max={props.item.stock}
                                 />

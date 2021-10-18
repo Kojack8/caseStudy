@@ -31,7 +31,8 @@ public class ProductEntityController {
 
     @PostMapping
     public ResponseEntity createProduct(@RequestBody ProductDTO product) throws URISyntaxException {
-        ProductDTO savedProduct = productService.save(product);
+        ProductDTO savedProduct = productService.saveNew(product);
+        //ProductDTO savedProduct = productService.createNew(product);
         return ResponseEntity.created(new URI("/productEntities" + savedProduct.getId())).body(savedProduct);
     }
 
