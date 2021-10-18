@@ -97,7 +97,9 @@ const Inventory = () => {
                             <tr key={i}>
                                 <td>{items.name}</td>
                                 <td>{items.description}</td>
-                                <td>{items.stock}</td>
+                                { items.stock !==0 ?
+                                    <td>{items.stock}</td>
+                                : <td class="no-stock"> Out Of Stock</td>}
                                 <td>{items.price}</td>
                                 <td>
                                     <button onClick={() => addToCart(items)}> Add </button>

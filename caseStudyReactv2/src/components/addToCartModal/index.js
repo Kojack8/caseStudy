@@ -67,7 +67,12 @@ const AddToCartModal = (props) => {
                             <button onClick={() => addToCart()}> Add </button>
                         </td>
                     </tr>
-                </table>
+                </table>{ props.item.stock == 0 ?
+                <span class="no-stock"> Sorry, this item is out of stock </span>
+                : null}
+
+
+
             </div>
         </div>
     )
