@@ -65,6 +65,7 @@ public class PurchaseController {
             //ShoppingCartDTO cart = shoppingCartService.findCartDTOByUserId(userId);
            // 1) COPY CART ITEMS FROM THE CURRENT CART INTO PURCHASE
             List<CartItemDTO> cartItems = cartItemService.findAllCartItemsByUserId(userId);
+
             List<PurchaseDTO> purchases = purchaseService.convertCartItemsToPurchase(cartItems, userId);
             purchaseService.saveMultiplePurchases(purchases);
             //2) REMOVE CART ITEMS FROM CURRENT CART

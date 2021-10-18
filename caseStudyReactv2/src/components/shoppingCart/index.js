@@ -31,20 +31,7 @@ const ShoppingCart = () => {
     const deleteFromCart = (item) => {
         setShowModal(true);
         setSelectedItem(item);
-        /*console.log(id)
-        axios(`cartitem`, {
-                method: 'DELETE',
-                params: {
-                  id: id
-                },
-                headers: {
 
-                    'X-XSRF-TOKEN': csrfToken
-                }
-            }
-        ).then((response) => {
-            console.log("yo")
-        })*/
     }
 
     const modalCallBackData = (data) => {

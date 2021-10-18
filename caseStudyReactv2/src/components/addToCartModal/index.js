@@ -7,7 +7,7 @@ const csrfToken=  Cookies.get('XSRF-TOKEN');
 
 const AddToCartModal = (props) => {
 
-    const [orderQuantity, setOrderQuantity] = useState(0);
+    const [orderQuantity, setOrderQuantity] = useState(1);
 
 
 
