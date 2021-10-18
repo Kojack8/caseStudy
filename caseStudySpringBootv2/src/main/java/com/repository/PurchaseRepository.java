@@ -11,4 +11,6 @@ public interface PurchaseRepository extends JpaRepository<PurchaseEntity, Long> 
 
     PurchaseEntity findById(long id);
 
+    List<PurchaseEntity> findAllByUserId(long id);
+
 }

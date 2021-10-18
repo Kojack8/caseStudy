@@ -1,12 +1,7 @@
 package com.service.implementations;
 
-import com.dto.CartItemDTO;
-import com.dto.ProductDTO;
-import com.dto.PurchaseDTO;
-import com.dto.UserDTO;
-import com.entitymodels.ProductEntity;
+import com.dto.*;
 import com.entitymodels.PurchaseEntity;
-import com.entitymodels.UserEntity;
 import com.repository.PurchaseRepository;
 import com.service.ProductService;
 import com.service.PurchaseService;
@@ -50,13 +45,35 @@ public class PurchaseHibernateService implements PurchaseService {
                 .collect(Collectors.toList());
     }
 
+    public List<PurchaseDTOProductName> findAllPurchasesByUserId(Long id) {
+        return (List<PurchaseDTOProductName>) purchaseRepository
+                .findAllByUserId(id)
+                .stream()
+                .map(this::convertToPurchaseDTOProductName)
+                .collect(Collectors.toList());
+    }
+
     public PurchaseDTO convertToPurchaseDTO(PurchaseEntity purchaseEntity) {
         PurchaseDTO purchaseDTO = new PurchaseDTO();
         purchaseDTO.setId(purchaseEntity.getId());
+        purchaseDTO.setQuantity(purchaseEntity.getQuantity());
         //UserDTO user = userService.convertToUserDTO(purchaseEntity.getUser());
         purchaseDTO.setUserId(purchaseEntity.getUser().getId());
         //ProductDTO product = productService.convertToProductDTO(purchaseEntity.getProduct());
         purchaseDTO.setProductId(purchaseEntity.getProduct().getId());
+        purchaseDTO.setPurchasedAt(purchaseEntity.getPurchasedAt());
+
+        return purchaseDTO;
+    }
+
+    public PurchaseDTOProductName convertToPurchaseDTOProductName(PurchaseEntity purchaseEntity) {
+        PurchaseDTOProductName purchaseDTO = new PurchaseDTOProductName();
+        purchaseDTO.setId(purchaseEntity.getId());
+        purchaseDTO.setQuantity(purchaseEntity.getQuantity());
+        //UserDTO user = userService.convertToUserDTO(purchaseEntity.getUser());
+        purchaseDTO.setUserId(purchaseEntity.getUser().getId());
+        //ProductDTO product = productService.convertToProductDTO(purchaseEntity.getProduct());
+        purchaseDTO.setProductName(purchaseEntity.getProduct().getName());
         purchaseDTO.setPurchasedAt(purchaseEntity.getPurchasedAt());
 
         return purchaseDTO;

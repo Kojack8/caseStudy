@@ -2,6 +2,7 @@ package com.controller;
 
 import com.dto.CartItemDTO;
 import com.dto.PurchaseDTO;
+import com.dto.PurchaseDTOProductName;
 import com.dto.ShoppingCartDTO;
 import com.entitymodels.ShoppingCartEntity;
 import com.logging.LombokLoggingController;
@@ -41,10 +42,19 @@ public class PurchaseController {
     }
 
     @GetMapping
-    public List<PurchaseDTO> getPurchases(){
-        List<PurchaseDTO> purchases = purchaseService.findAllPurchases();
-        return purchases;
+    public List<PurchaseDTOProductName> getUserPurchases(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            CustomUserDetails userPrincipal = (CustomUserDetails) authentication.getPrincipal();
+            Long userId = userPrincipal.getId();
+            List<PurchaseDTOProductName> purchases = purchaseService.findAllPurchasesByUserId(userId);
+            return purchases;
+        } else {
+            return null;
+        }
     }
+
+
 
     @PostMapping
     public ResponseEntity purchaseFromCart(){

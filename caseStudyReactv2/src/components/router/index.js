@@ -8,6 +8,7 @@ import Logout from "../logout"
 import axios from "axios";
 import Cookies from "js-cookie";
 import ShoppingCart from "../shoppingCart";
+import PurchaseHistory from "../purchaseHistory";
 
 const csrfToken = Cookies.get('XSRF-TOKEN');
 
@@ -62,6 +63,7 @@ const Router = (props) => {
                 <Logout username={username} callBack={logoutCallBackData} />
             </Route>
             <Route exact path="/cart" component={ShoppingCart}/>
+            <Route exact path="/purchase_history" component={PurchaseHistory}/>
 
         </Switch>
     );

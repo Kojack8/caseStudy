@@ -8,7 +8,7 @@ const baseURL = "cart"
 const csrfToken=  Cookies.get('XSRF-TOKEN');
 
 
-function ShoppingCart(){
+const ShoppingCart = () => {
 
     const [cartItems, setCartItems] = useState([] );
     const [showModal, setShowModal] = useState(false);
@@ -103,8 +103,7 @@ function ShoppingCart(){
                                     <button onClick={() => finalCheckOut()}> Check Out </button>
                                 </React.Fragment>
                             )
-                        })
-                        }
+                        })}
                     </table>
                 : null}
             </div>
