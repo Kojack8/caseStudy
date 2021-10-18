@@ -69,18 +69,12 @@ public class CartItemController {
         //String rxId = id.replaceAll("[^0-9]+", "");
         //Integer intId = (Integer.valueOf(id));
         logger.warn(String.valueOf(quantity));
-
-        CartItemDTO savedCartItem = cartItemService.addCartItem(id, quantity);
-        //CartItemEntity cartItem = new CartItemEntity();
-        //ProductEntity productEntity = productRepo.findById(intId).get();
-        //ProductDTO productDTO = productService.findById(intId);
-
-        //cartItem.setProduct(productEntity);
-        //cartItem.setQuantity(1);
-
-        //CartItemEntity savedCartItem = cartItemRepository.save(cartItem);
-        return ResponseEntity.created(new URI("/cartItemEntities" + savedCartItem.getId())).body(savedCartItem);
-        //return null;
+        if (quantity <= productRepo.findById((int) id).getStock()) {
+            CartItemDTO savedCartItem = cartItemService.addCartItem(id, quantity);
+            return ResponseEntity.created(new URI("/cartItemEntities" + savedCartItem.getId())).body(savedCartItem);
+        } else {
+            return null;
+        }
     }
 
     @PutMapping("/{id}")

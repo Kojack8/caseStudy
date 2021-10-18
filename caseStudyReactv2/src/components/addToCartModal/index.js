@@ -17,7 +17,7 @@ const AddToCartModal = (props) => {
     }
 
     const addToCart = () => {
-        if (orderQuantity > 0) {
+        if (orderQuantity > 0 && orderQuantity <= props.item.stock) {
             axios({
 
                 method: 'POST',

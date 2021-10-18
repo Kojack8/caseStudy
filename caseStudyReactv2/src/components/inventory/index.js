@@ -88,7 +88,6 @@ const Inventory = () => {
                         <td>Description</td>
                         <td>Stock</td>
                         <td>Price</td>
-                        <td>Last Update</td>
                         <td>Add to cart</td>
                     </tr>
                     </thead>
@@ -100,7 +99,6 @@ const Inventory = () => {
                                 <td>{items.description}</td>
                                 <td>{items.stock}</td>
                                 <td>{items.price}</td>
-                                <td>{items.updatedDate}</td>
                                 <td>
                                     <button onClick={() => addToCart(items)}> Add </button>
                                 </td>
