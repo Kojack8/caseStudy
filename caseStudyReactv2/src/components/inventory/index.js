@@ -99,7 +99,7 @@ const Inventory = (props) => {
                         <td>Description</td>
                         <td>Stock</td>
                         <td>Price</td>
-                        <td>Add to cart</td>
+                        { props.username === "" ? null : <td>Add to cart</td> }
                         { isAdmin ? <td> Delete From Database</td> : null}
                     </tr>
                     </thead>
@@ -111,9 +111,10 @@ const Inventory = (props) => {
                                 <td>{items.description}</td>
                                 { items.stock !==0 ? <td>{items.stock}</td> : <td className="no-stock"> Out Of Stock</td>}
                                 <td>{items.price}</td>
-                                <td>
+                                { props.username === "" ? null :
+                                    <td>
                                     <button onClick={() => addToCart(items)}> Add </button>
-                                </td>
+                                    </td> }
                                 { isAdmin ? <td>
                                     <button onClick={() => deleteFromDataBase(items)}> Delete</button>
                                 </td> : null}

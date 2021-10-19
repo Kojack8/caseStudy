@@ -55,7 +55,8 @@ const Router = (props) => {
         <Switch>
             <Route exact path='/' component={Home}/>
             <Route exact path='/inventory'>
-                <Inventory auth={props.auth}/>
+                <Inventory auth={props.auth}
+                username={username}/>
             </Route>
 
             <Route exact path='/login'>
