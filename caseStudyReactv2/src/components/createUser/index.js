@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import "./createUser.css";
+import styles from "./index.module.css";
 import axios from "axios";
 import CountrySelector from "../../reuseable/countrySelector";
 import StateSelector from "../../reuseable/stateSelector";

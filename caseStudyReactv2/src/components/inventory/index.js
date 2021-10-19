@@ -3,7 +3,7 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import {Form} from "react-bootstrap";
 import Cookies from "js-cookie";
-import "./inventory.css"
+import styles from "./index.module.css"
 import AddToCartModal from "../addToCartModal";
 import InventoryAdmin from "../inventoryAdmin";
 import DeleteWarningModal from "../deleteWarningModal";
@@ -72,7 +72,7 @@ const Inventory = (props) => {
 
     return (
 
-        <div className="inv-page">
+        <div>
 
             {showWarning ? <DeleteWarningModal item={selectedProduct} callBack={warningCallBackData}/> : null}
             {showModal ? <AddToCartModal  item={selectedProduct} callBack={modalCallBackData}/> : null}
@@ -109,7 +109,7 @@ const Inventory = (props) => {
                             <tr key={i}>
                                 <td>{items.name}</td>
                                 <td>{items.description}</td>
-                                { items.stock !==0 ? <td>{items.stock}</td> : <td className="no-stock"> Out Of Stock</td>}
+                                { items.stock !==0 ? <td>{items.stock}</td> : <td className={styles.noStock}> Out Of Stock</td>}
                                 <td>{items.price}</td>
                                 { props.username === "" ? null :
                                     <td>

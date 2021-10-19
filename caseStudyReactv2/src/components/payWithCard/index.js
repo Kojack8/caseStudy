@@ -3,6 +3,7 @@ import React from "react";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
+import styles from "./index.module.css"
 
 const csrfToken=  Cookies.get('XSRF-TOKEN');
 
@@ -33,11 +34,11 @@ const PayWithCard = (props) => {
 
 
     return(
-        <div className="checkout-modal">
-            <div className="modal-content">
+        <div className={styles.checkoutModal}>
+            <div className={styles.modalContent}>
                 This page is for demonstration purposes only. Please, do not enter your
                 credit card information. Simply press "Submit Payment" to continue.
-                <button className="exit-button" onClick={() =>goBack()}> Exit </button>
+                <button className={styles.exitButton} onClick={() =>goBack()}> Exit </button>
                 <Form>
                     <Form.Group controlId="name">
                         <Form.Label>Name On Card</Form.Label>

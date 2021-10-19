@@ -3,7 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import "./Logout.css"
+import styles from "./index.module.css"
 import {useHistory} from "react-router-dom";
 
 const csrfToken = Cookies.get('XSRF-TOKEN');
@@ -39,9 +39,9 @@ const Logout = (props) => {
     };
 
     return (
-        <div className="Logout">
+        <div className={styles.logout}>
             <Form onSubmit={handleSubmit}>
-                <span className ="form-header"> Are you sure you want to sign out? </span>
+                <span className ={styles.formHeader}> Are you sure you want to sign out? </span>
                 <Button block size="lg" type="submit"> Log Out </Button>
             </Form>
         </div>

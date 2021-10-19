@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import "./Login.css";
+import styles from "./index.module.css";
 import axios from "axios";
 import Cookies from "js-cookie";
 import {useHistory} from "react-router-dom";
@@ -68,9 +68,9 @@ const Login = (props) => {
 
 
     return (
-        <div className="Login">
+        <div className={styles.Login}>
             <Form onSubmit={handleSubmit}>
-                {error ? <span className="form-error"> Invalid Credentials </span> : null}
+                {error ? <span className={styles.formError}> Invalid Credentials </span> : null}
                 <Form.Group size="lg" controlId="email">
                     <Form.Label>Email</Form.Label>
                     <Form.Control

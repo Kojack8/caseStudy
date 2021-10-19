@@ -1,4 +1,4 @@
-import "./deleteWarningModal.css"
+import styles from "./index.module.css"
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -31,8 +31,8 @@ const DeleteWarningModal = (props) =>{
     }
 
     return (
-        <div className="checkout-modal">
-            <div className="modal-content">
+        <div className={styles.checkoutModal}>
+            <div className={styles.modalContent}>
                 <span>Warning! You are operating with administrator privileges.</span>
                 <span>This action cannot be undone</span>
                 <span>Do you want to continue?</span>

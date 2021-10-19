@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import React from "react";
-import "./deleteFromCartModal.css"
+import styles from "./index.module.css"
 import axios from "axios";
 
 const csrfToken=  Cookies.get('XSRF-TOKEN');
@@ -36,9 +36,9 @@ const DeleteFromCartModal = (props) => {
     }
 
     return (
-        <div className="modal-div">
-            <div className="modal-content">
-                <button className="exit-button" onClick={() => exitModal()}> Exit </button>
+        <div className={styles.modalDiv}>
+            <div className={styles.modalContent}>
+                <button className={styles.exitButton} onClick={() => exitModal()}> Exit </button>
                 <table>
                     <thead>
                         <tr>
