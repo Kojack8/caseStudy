@@ -19,8 +19,11 @@ const ShoppingCart = () => {
     const [showModal, setShowModal] = useState(false);
     const [showPayWithCard, setShowPayWithCard] = useState(false);
     const [selectedItem, setSelectedItem] = useState([]);
+    const [itemCount, setItemCount] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0.00);
 
     useEffect(() => {
+
         axios(`${baseURL}`, {
                 method: 'GET',
             headers: {
@@ -30,11 +33,24 @@ const ShoppingCart = () => {
             }
         ).then((response) => {
             setCartItems([response.data] )
-            console.log(cartItems);
-
         })
         // eslint-disable-next-line
     }, [])
+
+    useEffect( () => {
+        setTotals();
+    }, [cartItems])
+
+    const setTotals = () => {
+        console.log(cartItems)
+        cartItems.forEach(cartItem => {
+            cartItem.forEach(item => {
+                setItemCount((itemCount) => itemCount + parseInt(item.quantity));
+                setTotalPrice((totalPrice) => totalPrice + (parseInt(item.quantity) * item.price));
+
+            })})
+
+    }
 
     const deleteFromCart = (item) => {
         setShowModal(true);
@@ -48,18 +64,7 @@ const ShoppingCart = () => {
 
     const finalCheckOut = () => {
         setShowPayWithCard(false);
-        axios(`purchase`, {
-                method: 'POST',
-                params: {
-                },
-                headers: {
 
-                    'X-XSRF-TOKEN': csrfToken
-                }
-            }
-        ).then((response) => {
-            console.log("yo")
-        })
     }
 
 
@@ -78,6 +83,7 @@ const ShoppingCart = () => {
                         <tr>
                             <td>Product</td>
                             <td>Quantity</td>
+                            <td>Price</td>
                         </tr>
                         </thead>
 
@@ -89,22 +95,33 @@ const ShoppingCart = () => {
                                             //return <li key={sI}> {subItems.product} + {subItems.quantity} </li>
                                             return(
                                                 <tr key={sI}>
-                                                    <td>{subItems.product}</td>
+                                                    <td>{subItems.productName}</td>
                                                     <td>{subItems.quantity}</td>
+                                                    <td>{subItems.price}</td>
                                                     <td>
                                                         <button onClick={() => deleteFromCart(subItems)}> Remove From Cart </button>
                                                     </td>
                                                 </tr>
                                             )
                                         })}
+                                        <tr>
+                                            <td>Total:</td>
+                                            <td>{itemCount}</td>
+                                            <td>{totalPrice}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <button onClick={() => setShowPayWithCard(true)}> Pay With Card </button>
+                                            </td>
+                                        </tr>
                                     </tbody>
 
 
-                                    <button onClick={() => setShowPayWithCard(true)}> Pay With Card </button>
+
                                 </React.Fragment>
                             )
                         })}
-                        <div>{cartItems[0].length}</div>
+
                     </table>}
 
 

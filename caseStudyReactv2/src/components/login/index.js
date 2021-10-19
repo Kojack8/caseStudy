@@ -55,6 +55,7 @@ const Login = (props) => {
             }).then((response) => {
                 setUsername(response.data)
                 history.push("/");
+                window.location.reload(false);
             }).catch(err => {console.log(err)});
         })
         .catch(err => {

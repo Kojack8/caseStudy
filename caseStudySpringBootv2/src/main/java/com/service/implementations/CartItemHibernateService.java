@@ -1,6 +1,7 @@
 package com.service.implementations;
 
 import com.dto.CartItemDTO;
+import com.dto.CartItemDTOPrice;
 import com.dto.ShoppingCartDTO;
 import com.dto.UserDTO;
 import com.entitymodels.CartItemEntity;
@@ -58,6 +59,16 @@ public class CartItemHibernateService implements CartItemService {
         return cartItem;
     }
 
+    public List<CartItemDTOPrice> findAllCartItemsPriceByUserId(long id){
+        UserDTO user = userService.findUserById(id);
+        ShoppingCartDTO cart = shoppingCartService.findByUserEntity(userService.convertToUserEntity(user));
+        List<CartItemEntity> cartItems = cartItemRepository.findAllByShoppingCartEntity(shoppingCartService.convertToShoppingCartEntity(cart));
+        return (cartItems
+                .stream()
+                .map(this::convertToCartItemDTOPrice)
+                .collect(Collectors.toList()));
+    }
+
     public List<CartItemDTO> findAllCartItemsByUserId(long id){
         UserDTO user = userService.findUserById(id);
         ShoppingCartDTO cart = shoppingCartService.findByUserEntity(userService.convertToUserEntity(user));
@@ -102,6 +113,18 @@ public class CartItemHibernateService implements CartItemService {
         cartItemDTO.setQuantity(cartItemEntity.getQuantity());
         cartItemDTO.setUpdatedDate(cartItemEntity.getUpdatedDate());
         cartItemDTO.setShoppingCartId(cartItemEntity.getShoppingCartEntity().getId());
+
+        return cartItemDTO;
+    }
+
+    public CartItemDTOPrice convertToCartItemDTOPrice(CartItemEntity cartItemEntity){
+        CartItemDTOPrice cartItemDTO = new CartItemDTOPrice();
+        cartItemDTO.setId(cartItemEntity.getId());
+        cartItemDTO.setProductName(cartItemEntity.getProduct().getName());
+        cartItemDTO.setQuantity(cartItemEntity.getQuantity());
+        cartItemDTO.setUpdatedDate(cartItemEntity.getUpdatedDate());
+        cartItemDTO.setShoppingCartId(cartItemEntity.getShoppingCartEntity().getId());
+        cartItemDTO.setPrice(cartItemEntity.getProduct().getPrice());
 
         return cartItemDTO;
     }

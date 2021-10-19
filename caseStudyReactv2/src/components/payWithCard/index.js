@@ -1,10 +1,29 @@
 import {Form} from "react-bootstrap";
 import React from "react";
+import {useHistory} from "react-router-dom";
+import axios from "axios";
+import Cookies from "js-cookie";
+
+const csrfToken=  Cookies.get('XSRF-TOKEN');
 
 const PayWithCard = (props) => {
 
+    const history = useHistory();
+
     const checkOut = () => {
-        goBack();
+        axios(`purchase`, {
+                method: 'POST',
+
+                headers: {
+                    'X-XSRF-TOKEN': csrfToken
+                }
+            }
+        ).then((response) => {
+            goBack();
+            history.push("/purchase_history");
+            window.location.reload(false);
+        })
+
     }
 
     const goBack = () => {
@@ -51,7 +70,7 @@ const PayWithCard = (props) => {
                             autoFocus
                             type="text"
                             pattern="[0-9/]*"
-                            maxlength="3"
+                            maxLength="3"
                         />
                     </Form.Group>
                 </Form>

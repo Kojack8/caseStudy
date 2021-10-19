@@ -6,6 +6,7 @@ import axios from "axios";
 import CountrySelector from "../../reuseable/countrySelector";
 import StateSelector from "../../reuseable/stateSelector";
 import Cookies from 'js-cookie';
+import {useHistory} from "react-router-dom";
 
 
 const baseURL = "users"
@@ -23,6 +24,7 @@ const CreateUser = () => {
     const [country, setCountry] = useState("");
     const [zip, setZip] = useState("");
     const [phone, setPhone] = useState("");
+    const history = useHistory();
 
     function validateForm() {
 
@@ -58,7 +60,9 @@ const CreateUser = () => {
                     'X-XSRF-TOKEN': csrfToken
                 }
             }
-        ).then((response) => {console.log(response)})
+        ).then((response) => {
+            history.push("/");
+            console.log(response)})
             .catch(err => console.log(err));
     };
 

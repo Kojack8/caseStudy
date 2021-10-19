@@ -1,9 +1,6 @@
 package com.service;
 
-import com.dto.CartItemDTO;
-import com.dto.ProductDTO;
-import com.dto.PurchaseDTO;
-import com.dto.PurchaseDTOProductName;
+import com.dto.*;
 import com.entitymodels.PurchaseEntity;
 
 import java.util.List;
@@ -20,6 +17,7 @@ public interface PurchaseService {
 
     PurchaseDTO convertToPurchaseDTO(PurchaseEntity purchaseEntity);
 
+    PurchaseDTO convertCartItemToPurchase(CartItemDTO cartItem, Long userId);
 
     List<PurchaseDTO> convertCartItemsToPurchase(List<CartItemDTO> cartItems, Long userId);
 

@@ -31,8 +31,9 @@ const Logout = (props) => {
             }
         }).then(response => {
             setUsername("");
-            history.push("/inventory");
-            //window.location.reload();
+            history.push("/");
+            window.location.reload(false);
+
         }).catch((err) => console.log(err));
 
     };

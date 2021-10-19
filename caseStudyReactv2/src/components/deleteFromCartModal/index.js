@@ -18,7 +18,8 @@ const DeleteFromCartModal = (props) => {
                 'X-XSRF-TOKEN': csrfToken
             }
         }).then((res) => {
-            console.log(res);
+            goBack();
+            window.location.reload(false);
         }).catch((err) => {
             console.log(err);
         })
@@ -26,11 +27,12 @@ const DeleteFromCartModal = (props) => {
 
     /* Callback method used with parent class */
     const goBack = () => {
-        props.callBack(false);
+        props.callBack();
     }
 
     const exitModal = () => {
         goBack();
+
     }
 
     return (
@@ -39,16 +41,22 @@ const DeleteFromCartModal = (props) => {
                 <button className="exit-button" onClick={() => exitModal()}> Exit </button>
                 <table>
                     <thead>
-                        Are you sure you want to delete "{props.item.product}" from your cart?
+                        <tr>
+                            <td>
+                                Are you sure you want to delete "{props.item.productName}" from your cart?
+                            </td>
+                        </tr>
                     </thead>
-                    <tr>
-                        <td>
-                            <button onClick={() => exitModal()}> No </button>
-                        </td>
-                        <td>
-                            <button onClick={() => removeFromCart()}> Yes </button>
-                        </td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <button onClick={() => exitModal()}> No </button>
+                            </td>
+                            <td>
+                                <button onClick={() => removeFromCart()}> Yes </button>
+                            </td>
+                        </tr>
+                    </tbody>
 
                 </table>
 

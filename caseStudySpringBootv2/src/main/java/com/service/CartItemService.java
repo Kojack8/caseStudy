@@ -1,6 +1,7 @@
 package com.service;
 
 import com.dto.CartItemDTO;
+import com.dto.CartItemDTOPrice;
 import com.entitymodels.CartItemEntity;
 
 import java.util.List;
@@ -13,11 +14,15 @@ public interface CartItemService {
 
     List<CartItemDTO> findAllCartItemsByUserId(long id);
 
+    List<CartItemDTOPrice> findAllCartItemsPriceByUserId(long id);
+
     List<CartItemDTO> findAllCartItems();
 
     CartItemDTO addCartItem(int id, int quantity);
 
     CartItemDTO convertToCartItemDTO(CartItemEntity cartItemEntity);
+
+    CartItemDTOPrice convertToCartItemDTOPrice(CartItemEntity cartItemEntity);
 
     CartItemEntity convertToEntity(CartItemDTO cartItemDTO);
 

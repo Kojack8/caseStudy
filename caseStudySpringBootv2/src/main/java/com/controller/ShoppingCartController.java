@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.dto.CartItemDTO;
+import com.dto.CartItemDTOPrice;
 import com.dto.ShoppingCartDTO;
 import com.dto.UserDTO;
 import com.entitymodels.ShoppingCartEntity;
@@ -43,14 +44,14 @@ public class ShoppingCartController {
     }
 
     @GetMapping
-    public List<CartItemDTO> getMyCart() {
+    public List<CartItemDTOPrice> getMyCart() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             CustomUserDetails userPrincipal = (CustomUserDetails) authentication.getPrincipal();
             Long userID = userPrincipal.getId();
             //UserDTO user = userService.findUserById(userID);
             //ShoppingCartDTO cart = shoppingCartService.findByUserEntity(userService.convertToUserEntity(user));
-            List<CartItemDTO> items = cartItemService.findAllCartItemsByUserId(userID);
+            List<CartItemDTOPrice> items = cartItemService.findAllCartItemsPriceByUserId(userID);
             return items;
         } else {
             return null;
