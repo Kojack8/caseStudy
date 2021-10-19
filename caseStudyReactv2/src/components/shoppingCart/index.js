@@ -49,7 +49,7 @@ const ShoppingCart = () => {
                 setTotalPrice((totalPrice) => totalPrice + (parseInt(item.quantity) * item.price));
 
             })})
-
+// eslint-disable-next-line
     }
 
     const deleteFromCart = (item) => {

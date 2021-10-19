@@ -1,17 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {NavLink} from "react-router-dom";
+import styles from "./index.module.css";
+import Button from "react-bootstrap/Button";
+import {Form} from "react-bootstrap";
 
-const Navigation = ({username}) => {
+const Navigation = (props) => {
 
 
-    if (username === "") {
+    if (props.username === "") {
         return (
             <nav>
                 <ul>
                     <li><NavLink exact activeClassName="current" to='/'>Home</NavLink></li>
                     <li><NavLink exact activeClassName="current" to='/inventory'>Inventory</NavLink></li>
-                    <li><NavLink exact activeClassName="current" to='/login'>Login</NavLink></li>
-                    <li><NavLink exact activeClassName="current" to='/signup'>Sign-up</NavLink></li>
+                    <li className={styles.login}><NavLink exact activeClassName="current" to='/login'>Login</NavLink></li>
+                    <li className={styles.signUp}><NavLink exact activeClassName="current" to='/signup'>Sign-up</NavLink></li>
 
                 </ul>
             </nav>

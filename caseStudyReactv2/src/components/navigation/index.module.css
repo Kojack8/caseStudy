@@ -1,0 +1,28 @@
+nav ul {
+    list-style: none;
+    display: flex;
+    background-color: black;
+    margin-bottom: 20px;
+}
+
+nav ul li {
+    padding: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.current {
+    border-bottom: 4px solid white;
+}
+
+.login{
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.signUp{
+    margin-right: 0;
+}
