@@ -35,7 +35,7 @@ const App = () => {
 
     return (
         <div className='app'>
-            { (auth.length !== 0) ?
+            {/*{ (auth.length !== 0) ?
             <div>
 
             {username} +
@@ -49,8 +49,8 @@ const App = () => {
             }
             </div>
             : null }
-            <TestModule/>
-            <h1>Video Production Shopping Service</h1>
+            <TestModule/>*/}
+
 
             <Navigation username={username}/>
             <Router callBack={userCallBackData}

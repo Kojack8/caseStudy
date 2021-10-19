@@ -26,3 +26,11 @@ nav ul li a {
 .signUp{
     margin-right: 0;
 }
+
+.title {
+    color: white;
+    flex: 3;
+    text-align: center;
+    padding: 5px;
+    margin: 0px;
+}

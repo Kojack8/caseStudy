@@ -39,10 +39,10 @@ const ShoppingCart = () => {
 
     useEffect( () => {
         setTotals();
+        // eslint-disable-next-line
     }, [cartItems])
 
     const setTotals = () => {
-        console.log(cartItems)
         cartItems.forEach(cartItem => {
             cartItem.forEach(item => {
                 setItemCount((itemCount) => itemCount + parseInt(item.quantity));

@@ -15,7 +15,7 @@ const baseURL = "search"
 
 const Inventory = (props) => {
 
-    const [searchName, setSearchName] = useState(props.searchTerm);
+    const [searchName, setSearchName] = useState("");
     const [products, setProducts] = useState("");
     const [selectedProduct, setSelectedProduct] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -24,8 +24,6 @@ const Inventory = (props) => {
 
 
     useEffect(() => {
-        console.log("heyo")
-        console.log(searchName)
         if (props.auth.length !== 0 ) {
             props.auth.forEach(element => {
                 if (element.authority === "ROLE_ADMIN") {
