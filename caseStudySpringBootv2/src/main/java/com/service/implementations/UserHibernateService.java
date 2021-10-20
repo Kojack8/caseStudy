@@ -32,6 +32,7 @@ public class UserHibernateService implements UserService {
 
     public UserDTO findUserById(Long id) {
         UserEntity user = userRepository.findById(id)
+                //LAMBDA HERE
                 .orElseThrow(() -> new EntityNotFoundException(String.valueOf(id)));
         return convertToUserDTO(user);
     }

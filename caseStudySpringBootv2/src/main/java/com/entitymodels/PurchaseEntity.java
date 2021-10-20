@@ -23,7 +23,7 @@ public class PurchaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-   
+
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ProductEntity product;
 
