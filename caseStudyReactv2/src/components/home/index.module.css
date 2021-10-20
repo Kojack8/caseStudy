@@ -1,0 +1,8 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}

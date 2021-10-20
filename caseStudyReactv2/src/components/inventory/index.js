@@ -74,7 +74,7 @@ const Inventory = (props) => {
 
     return (
 
-        <div>
+        <div className={styles.wrapper}>
 
             {showWarning ? <DeleteWarningModal item={selectedProduct} callBack={warningCallBackData}/> : null}
             {showModal ? <AddToCartModal  item={selectedProduct} callBack={modalCallBackData}/> : null}

@@ -69,7 +69,7 @@ const CreateUser = () => {
 
 
     return (
-        <div className="Create User">
+        <div className={styles.wrapper}>
             <Form onSubmit={handleSubmit}>
                 <Form.Group size="lg" controlId="email">
                     <Form.Label>Email</Form.Label>

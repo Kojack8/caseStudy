@@ -22,54 +22,23 @@ const App = () => {
                 'X-XSRF-TOKEN': csrfToken
             }
         }).then((response) => {
-            console.log(response);
             setAuth(response.data)
-        }).catch(err => {console.log(err)});
+        }).catch(err => {
+            console.log(err)
+        });
     }, [])
+
     const userCallBackData = (data) => {
-
         setUsername(data)
-
     }
-
 
     return (
         <div className='app'>
-            {/*{ (auth.length !== 0) ?
-            <div>
-
-            {username} +
-            {auth.map((items, i) => {
-                return (
-                    <div key={i}>
-                        <div>{items.authority}</div>
-                    </div>
-                )
-            })
-            }
-            </div>
-            : null }
-            <TestModule/>*/}
-
-
             <Navigation username={username}/>
             <Router callBack={userCallBackData}
                     auth={auth}/>
-
-
         </div>
     );
-
 }
-
-
-
-
-
-
-
-
-
-
 
 export default App;

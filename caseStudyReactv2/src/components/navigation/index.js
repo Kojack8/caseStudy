@@ -27,7 +27,7 @@ const Navigation = (props) => {
                 <li><NavLink exact activeClassName="current" to='/inventory'>Inventory</NavLink></li>
                 <li><NavLink exact activeClassName="current" to='/cart'>Shopping Cart</NavLink></li>
                 <li className={styles.title}><h1>Video Production Shopping Service</h1></li>
-                <li>eeeeee</li>
+                <li className={styles.fill}>eeeeee</li>
                 <li><NavLink exact activeClassName="current" to='/purchase_history'>Purchase History</NavLink></li>
                 <li><NavLink exact activeClassName="current" to='/logout'>Logout</NavLink></li>
             </ul>

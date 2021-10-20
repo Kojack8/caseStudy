@@ -1,16 +1,31 @@
-.Login {
-    padding: 60px 0;
-}
-
 .Login form {
-    margin: 0 auto;
+    margin: auto;
     max-width: 320px;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
+
 }
 
 .formError {
     color: red;
     margin: 0 auto;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin: auto;
+    width: 30%;
+    text-align: center;
+    border: 2px solid #131921;
+    background-color: white;
+    padding: 20px;
+}
+
+.title{
+    margin: 10px;
+    font-weight: bolder;
+    font-size: xx-large;
 }

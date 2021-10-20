@@ -1,5 +1,8 @@
 html {
   box-sizing: border-box;
+  height: 100%;
+
+
 }
 
 *, *::before, *::after {
@@ -10,8 +13,12 @@ html {
 
 .app {
   margin: 0 auto;
-  padding: 20px;
+  height: 100vh;
+  background: rgb(0,215,255);
+  background: linear-gradient(180deg, rgba(0,215,255,0.01) 0%, rgba(0,215,255,1) 0%, rgba(255,255,255,1) 100%);
 }
+
+
 
 
 
