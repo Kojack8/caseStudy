@@ -19,10 +19,11 @@ import java.util.Set;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    Logger logger = LoggerFactory.getLogger(LombokLoggingController.class);
+
 
     @Autowired
     private UserRepository userRepository;
+    private Logger logger = LoggerFactory.getLogger(LombokLoggingController.class);
 
     @Transactional
     @Override

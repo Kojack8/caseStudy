@@ -23,7 +23,7 @@ public class ProductEntityController {
         this.productRepository = productRepository;
         this.productService = productService;
     }
-    // WHERE I LEFT OFF: CONVERT CONTROLLER FROM USING ENTITIES TO DTOS
+
     @GetMapping
     public List<ProductDTO> getProducts(){
         return productService.findAllProducts();

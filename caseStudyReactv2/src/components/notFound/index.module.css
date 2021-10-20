@@ -5,11 +5,11 @@
 }
 .leftImgWrapper{
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
 }
 
 .left{
-    width:60%;
+    width:80%;
     margin-top: 15%;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .right{
-    width: 50%;
+    width: 70%;
     margin-top: 15%;
 }
 

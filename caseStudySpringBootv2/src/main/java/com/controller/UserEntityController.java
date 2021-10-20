@@ -6,12 +6,16 @@ import com.dto.UserDTO;
 import com.entitymodels.RoleEntity;
 import com.entitymodels.ShoppingCartEntity;
 import com.entitymodels.UserEntity;
+import com.logging.LombokLoggingController;
 import com.repository.ShoppingCartRepository;
 import com.service.RoleService;
 import com.service.ShoppingCartService;
 import com.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.repository.UserRepository;
 
@@ -31,6 +35,7 @@ public class UserEntityController {
     private final RoleService roleService;
     private final ShoppingCartRepository shoppingCartRepository;
     private final UserService userService;
+    private final Logger logger;
 
     @Autowired
     public UserEntityController(UserRepository userRepository, RoleService roleService,
@@ -39,6 +44,7 @@ public class UserEntityController {
         this.roleService = roleService;
         this.shoppingCartRepository = shoppingCartRepository;
         this.userService = userService;
+        this.logger = LoggerFactory.getLogger(LombokLoggingController.class);
     }
 
     @GetMapping
@@ -60,7 +66,11 @@ public class UserEntityController {
 
 
     @PostMapping
-    public ResponseEntity createUser(@RequestBody UserDTO user) throws URISyntaxException {
+    public ResponseEntity createUser(@RequestBody UserDTO user, BindingResult result1) throws URISyntaxException {
+        if (result1.getErrorCount() != 0) {
+            logger.warn("Binding result error count for UserDTO:" + (result1.getErrorCount()));
+            return null;
+        }
         try {
             String userRole = "ROLE_USER";
             Collection<String> roles = new ArrayList<String>();

@@ -4,6 +4,7 @@ import com.dto.ProductDTO;
 import com.entitymodels.ProductEntity;
 import com.repository.ProductRepository;
 import com.service.ProductService;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class SearchController {
         }
         List<ProductDTO> product = new ArrayList<ProductDTO>();
         product.add(productService.findByName(name));
+
         return product;
     }
 
