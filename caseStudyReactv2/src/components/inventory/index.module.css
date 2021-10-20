@@ -25,7 +25,7 @@ td{
     flex-direction: column;
     justify-content: flex-end;
     margin: auto;
-    width: 50%;
+    width: 75%;
     text-align: center;
 }
 
@@ -53,4 +53,33 @@ td{
 .searchTableWrapper{
     border: 2px solid #131921;
     background-color: #e0e0e0;
+
+}
+
+.searchTableWrapper table{
+    width: 100%;
+}
+
+.searchTableWrapper button{
+    width: 100%;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    color: #fff;
+}
+
+.searchTableWrapper button:hover{
+    background-color: #0073ee;
+    border: 1px solid #0073ee;
+}
+
+.searchTableWrapper .deleteButton{
+    background-color: #ff0000;
+    border: 1px solid #ff0000;
+    width: 100%;
+    color: #fff;
+}
+
+.searchTableWrapper .deleteButton:hover{
+    background-color: #de0000;
+    border: 1px solid #de0000;
 }

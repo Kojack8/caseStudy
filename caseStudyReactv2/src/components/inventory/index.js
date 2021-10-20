@@ -119,7 +119,7 @@ const Inventory = (props) => {
                                         <button onClick={() => addToCart(items)}> Add </button>
                                         </td> }
                                     { isAdmin ? <td>
-                                        <button onClick={() => deleteFromDataBase(items)}> Delete</button>
+                                        <button className={styles.deleteButton} onClick={() => deleteFromDataBase(items)}> Delete</button>
                                     </td> : null}
                                 </tr>
                             )
