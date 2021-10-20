@@ -12,10 +12,10 @@ const NotFound = () => {
             </span>
             <div className={styles.images}>
                 <div className={styles.leftImgWrapper}>
-                    <img className={styles.left} src={dev}/>
+                    <img className={styles.left} src={dev} alt="Woman sitting atop 404 text"/>
                 </div>
                 <div className={styles.rightImgWrapper}>
-                    <img className={styles.right} src={dev2}/>
+                    <img className={styles.right} src={dev2} alt="Aliens hiding behind bushes (not found)"/>
                 </div>
             </div>
         </div>

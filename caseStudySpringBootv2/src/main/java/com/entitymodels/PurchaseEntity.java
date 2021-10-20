@@ -23,9 +23,8 @@ public class PurchaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    //GETTING THIS TO WORK RIGHT IS WHERE YOU LEFT OFF.
-    //YOU MAY HAVE TO DROP THE SCHEMA
-    //@OnDelete(action = OnDeleteAction.CASCADE)
+   
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private ProductEntity product;
 
     @Column(name = "purchased_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
