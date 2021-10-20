@@ -78,54 +78,56 @@ const Inventory = (props) => {
 
             {showWarning ? <DeleteWarningModal item={selectedProduct} callBack={warningCallBackData}/> : null}
             {showModal ? <AddToCartModal  item={selectedProduct} callBack={modalCallBackData}/> : null}
-
-            <h2>Hey it's me the inventory page</h2>
-            <Form className="Search" onSubmit={handleSubmit}>
-                <input type="text"
-                       placeholder="Search"
-                       value={searchName}
-                       onChange={(e) => setSearchName(e.target.value)}
-                />
-                <Button block size="sm" type="submit">
-                    Search
-                </Button>
-            </Form>
+            <div className={styles.searchWrapper}>
+                <Form className="Search" onSubmit={handleSubmit}>
+                    <input type="text"
+                           placeholder="Search"
+                           value={searchName}
+                           onChange={(e) => setSearchName(e.target.value)}
+                    />
+                    <Button block size="sm" type="submit">
+                        Search
+                    </Button>
+                </Form>
+            </div>
             <br/>
 
 
             { products !== "" ?
-                <table>
-                    <thead>
-                    <tr>
-                        <td>Name</td>
-                        <td>Description</td>
-                        <td>Stock</td>
-                        <td>Price</td>
-                        { props.username === "" ? null : <td>Add to cart</td> }
-                        { isAdmin ? <td> Delete From Database</td> : null}
-                    </tr>
-                    </thead>
-                <tbody>
-                    {products.map((items, i) => {
-                        return (
-                            <tr key={i}>
-                                <td>{items.name}</td>
-                                <td>{items.description}</td>
-                                { items.stock !==0 ? <td>{items.stock}</td> : <td className={styles.noStock}> Out Of Stock</td>}
-                                <td>{items.price}</td>
-                                { props.username === "" ? null :
-                                    <td>
-                                    <button onClick={() => addToCart(items)}> Add </button>
-                                    </td> }
-                                { isAdmin ? <td>
-                                    <button onClick={() => deleteFromDataBase(items)}> Delete</button>
-                                </td> : null}
-                            </tr>
-                        )
-                    })
-                    }
-                    </tbody>
-                </table>
+                <div className={styles.searchTableWrapper} >
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Description</td>
+                            <td>Stock</td>
+                            <td>Price</td>
+                            { props.username === "" ? null : <td>Add to cart</td> }
+                            { isAdmin ? <td> Delete From Database</td> : null}
+                        </tr>
+                        </thead>
+                    <tbody>
+                        {products.map((items, i) => {
+                            return (
+                                <tr key={i}>
+                                    <td>{items.name}</td>
+                                    <td>{items.description}</td>
+                                    { items.stock !==0 ? <td>{items.stock}</td> : <td className={styles.noStock}> Out Of Stock</td>}
+                                    <td>{items.price}</td>
+                                    { props.username === "" ? null :
+                                        <td>
+                                        <button onClick={() => addToCart(items)}> Add </button>
+                                        </td> }
+                                    { isAdmin ? <td>
+                                        <button onClick={() => deleteFromDataBase(items)}> Delete</button>
+                                    </td> : null}
+                                </tr>
+                            )
+                        })
+                        }
+                        </tbody>
+                    </table>
+                </div>
             : null }
 
             {isAdmin ? <InventoryAdmin/> : null}

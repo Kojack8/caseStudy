@@ -3,6 +3,7 @@ import axios from 'axios';
 import Cookies from "js-cookie";
 import DeleteFromCartModal from "../deleteFromCartModal";
 import PayWithCard from "../payWithCard";
+import styles from "./index.module.css"
 
 
 
@@ -71,11 +72,11 @@ const ShoppingCart = () => {
 
 
     return (
-        <div className="Cart">
+        <div className={styles.wrapper}>
             {showModal ? <DeleteFromCartModal item={selectedItem} callBack={modalCallBackData} /> : null}
             {showPayWithCard ? <PayWithCard callBack={finalCheckOut}/> : null}
 
-            <div>
+            <div className={styles.cartWrapper}>
                 Your shopping cart:
                 { cartItems.length === 0 || cartItems[0].length === 0 ? <div> Currently empty!</div> :
                     <table>

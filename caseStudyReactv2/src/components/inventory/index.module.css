@@ -28,3 +28,29 @@ td{
     width: 50%;
     text-align: center;
 }
+
+.searchWrapper{
+    border: 2px solid #131921;
+    background-color: #e0e0e0;
+    margin: 20px;
+    padding: 20px;
+}
+
+.searchWrapper form{
+    display: flex;
+    padding: 5px;
+}
+
+.searchWrapper input {
+    width: 90%;
+    margin: 0px 5px;
+}
+
+.searchWrapper button{
+    width: 10%;
+}
+
+.searchTableWrapper{
+    border: 2px solid #131921;
+    background-color: #e0e0e0;
+}
