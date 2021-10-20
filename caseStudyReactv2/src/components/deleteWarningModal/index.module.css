@@ -3,7 +3,7 @@
     margin: 10%;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 40%;
     height: min-content;
 
 
@@ -23,6 +23,24 @@
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    justify-content: center;
 }
 
+.modalContent table{
+    width: 30%;
+}
+
+
+
+button{
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    color: #fff;
+    width: 100%;
+}
+
+button:hover{
+    background-color: #0073ee;
+    border: 1px solid #0073ee;
+}
 

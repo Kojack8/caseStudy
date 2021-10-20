@@ -70,7 +70,7 @@ const Login = (props) => {
     return (
         <div className={styles.wrapper}>
             <span className={styles.title}> Log In </span>
-            <div className={styles.Login}>
+            <div className={styles.login}>
                 <Form onSubmit={handleSubmit}>
                     {error ? <span className={styles.formError}> Invalid Credentials </span> : null}
                     <Form.Group size="lg" controlId="email">

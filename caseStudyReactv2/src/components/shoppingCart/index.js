@@ -77,55 +77,53 @@ const ShoppingCart = () => {
             {showPayWithCard ? <PayWithCard callBack={finalCheckOut}/> : null}
 
             <div className={styles.cartWrapper}>
+                <div className={styles.tableWrapper}>
                 Your shopping cart:
                 { cartItems.length === 0 || cartItems[0].length === 0 ? <div> Currently empty!</div> :
-                    <table>
-                        <thead>
-                        <tr>
-                            <td>Product</td>
-                            <td>Quantity</td>
-                            <td>Price</td>
-                        </tr>
-                        </thead>
+                    <div>
+                        <table>
+                            <thead>
+                            <tr>
+                                <td>Product</td>
+                                <td>Quantity</td>
+                                <td>Price</td>
+                                <td> Remove  From Cart</td>
+                            </tr>
+                            </thead>
 
-                        {cartItems.map((items, i) => {
-                            return (
-                                <React.Fragment key={i}>
-                                    <tbody>
-                                        {items.map((subItems, sI) => {
-                                            //return <li key={sI}> {subItems.product} + {subItems.quantity} </li>
-                                            return(
-                                                <tr key={sI}>
-                                                    <td>{subItems.productName}</td>
-                                                    <td>{subItems.quantity}</td>
-                                                    <td>{subItems.price}</td>
-                                                    <td>
-                                                        <button onClick={() => deleteFromCart(subItems)}> Remove From Cart </button>
-                                                    </td>
-                                                </tr>
-                                            )
-                                        })}
-                                        <tr>
-                                            <td>Total:</td>
-                                            <td>{itemCount}</td>
-                                            <td>{totalPrice}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <button onClick={() => setShowPayWithCard(true)}> Pay With Card </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                            {cartItems.map((items, i) => {
+                                return (
+                                    <React.Fragment key={i}>
+                                        <tbody>
+                                            {items.map((subItems, sI) => {
+                                                //return <li key={sI}> {subItems.product} + {subItems.quantity} </li>
+                                                return(
+                                                    <tr key={sI}>
+                                                        <td>{subItems.productName}</td>
+                                                        <td>{subItems.quantity}</td>
+                                                        <td>${subItems.price}</td>
+                                                        <td>
+                                                            <button onClick={() => deleteFromCart(subItems)}> Remove </button>
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            })}
+                                            <tr>
+                                                <td>Total:</td>
+                                                <td>{itemCount}</td>
+                                                <td>${totalPrice}</td>
+                                            </tr>
 
+                                        </tbody>
 
+                                    </React.Fragment>
+                                )
+                            })}
+                        </table>
 
-                                </React.Fragment>
-                            )
-                        })}
-
-                    </table>}
-
-
+                    <button className={styles.payButton} onClick={() => setShowPayWithCard(true)}> Pay With Card </button>
+                    </div>}
+                </div>
             </div>
         </div>
     )

@@ -24,15 +24,12 @@ const InventoryAdmin = () => {
         const product = {
             name: productName, description: productDesc, stock: productStock,
             price: productPrice};
-        console.log(product);
-
         axios({
             method: 'POST',
             url: `${baseURL}`,
             data: product,
             headers: {
                 'X-XSRF-TOKEN': csrfToken,
-
             }
         })
     }

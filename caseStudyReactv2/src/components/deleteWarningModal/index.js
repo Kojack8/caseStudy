@@ -34,10 +34,21 @@ const DeleteWarningModal = (props) =>{
         <div className={styles.checkoutModal}>
             <div className={styles.modalContent}>
                 <span>Warning! You are operating with administrator privileges.</span>
+                <br/>
                 <span>This action cannot be undone</span>
+                <br/>
                 <span>Do you want to continue?</span>
-                <button onClick={() => goBack()}> No </button>
-                <button onClick={() => deleteItem()}> Yes </button>
+                <br/>
+                <table>
+                    <tr>
+                        <td>
+                            <button onClick={() => goBack()}> No </button>
+                        </td>
+                        <td>
+                            <button onClick={() => deleteItem()}> Yes </button>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     )

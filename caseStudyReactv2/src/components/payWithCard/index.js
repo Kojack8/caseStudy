@@ -34,7 +34,7 @@ const PayWithCard = (props) => {
 
 
     return(
-        <div className={styles.checkoutModal}>
+        <div className={styles.wrapper}>
             <div className={styles.modalContent}>
                 This page is for demonstration purposes only. Please, do not enter your
                 credit card information. Simply press "Submit Payment" to continue.

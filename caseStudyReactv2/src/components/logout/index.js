@@ -39,11 +39,14 @@ const Logout = (props) => {
     };
 
     return (
-        <div className={styles.logout}>
-            <Form onSubmit={handleSubmit}>
-                <span className ={styles.formHeader}> Are you sure you want to sign out? </span>
-                <Button block size="lg" type="submit"> Log Out </Button>
-            </Form>
+        <div className={styles.wrapper}>
+            <div className={styles.logout}>
+                <span className={styles.title}> Log Out </span>
+                <Form onSubmit={handleSubmit}>
+                    <span className ={styles.formHeader}> Are you sure you want to sign out? </span>
+                    <Button block size="lg" type="submit"> Log Out </Button>
+                </Form>
+            </div>
         </div>
     );
 }

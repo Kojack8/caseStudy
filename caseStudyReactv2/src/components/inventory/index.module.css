@@ -52,13 +52,14 @@ td{
 
 .searchTableWrapper{
     border: 2px solid #131921;
-    background-color: #e0e0e0;
+    background-color: #fff;
 
 }
 
 .searchTableWrapper table{
     width: 100%;
 }
+
 
 .searchTableWrapper button{
     width: 100%;

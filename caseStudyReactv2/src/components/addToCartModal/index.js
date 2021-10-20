@@ -45,10 +45,10 @@ const AddToCartModal = (props) => {
     return (
         <div className={styles.checkoutModal}>
             <div className={styles.modalContent}>
-                <span>Add To Cart:</span>
                 <button className={styles.exitButton} onClick={() => exitModal()}> Exit</button>
+                <br/>
+                <span>Add To Cart:</span>
                 <table>
-
 
                     <tbody>
                     <tr>
@@ -66,7 +66,7 @@ const AddToCartModal = (props) => {
                             />
                         </td>
                         <td>
-                            <button onClick={() => addToCart()}> Add</button>
+                            <button className={styles.addButton} onClick={() => addToCart()}> Add</button>
                         </td>
                     </tr>
                     </tbody>

@@ -3,11 +3,14 @@
     margin: 10%;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 40%;
     height: min-content;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
 }
 
-.checkoutModal {
+.wrapper {
     display: flex;
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -19,10 +22,27 @@
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0, 0, 0); /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    justify-content: center;
 }
 
 .exitButton {
     margin-left: auto;
     width: 5%;
+    background-color: #007bff;
+    border: 1px solid #007bff;
 }
+
+.modalContent table {
+    width: 20%;
+}
+
+td button {
+    width: 100%;
+}
+
+table{
+    margin: auto;
+}
+
+
 

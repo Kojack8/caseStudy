@@ -1,5 +1,8 @@
 package com.entitymodels;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -20,6 +23,9 @@ public class PurchaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
+    //GETTING THIS TO WORK RIGHT IS WHERE YOU LEFT OFF.
+    //YOU MAY HAVE TO DROP THE SCHEMA
+    //@OnDelete(action = OnDeleteAction.CASCADE)
     private ProductEntity product;
 
     @Column(name = "purchased_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

@@ -36,17 +36,11 @@ const DeleteFromCartModal = (props) => {
     }
 
     return (
-        <div className={styles.modalDiv}>
+        <div className={styles.wrapper}>
             <div className={styles.modalContent}>
                 <button className={styles.exitButton} onClick={() => exitModal()}> Exit </button>
+                <span>Are you sure you want to delete "{props.item.productName}" from your cart?</span>
                 <table>
-                    <thead>
-                        <tr>
-                            <td>
-                                Are you sure you want to delete "{props.item.productName}" from your cart?
-                            </td>
-                        </tr>
-                    </thead>
                     <tbody>
                         <tr>
                             <td>

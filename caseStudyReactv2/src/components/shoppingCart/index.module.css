@@ -12,8 +12,35 @@
 
 .cartWrapper{
     margin: auto;
-    max-width: 320px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.tableWrapper{
+    border: 2px solid #131921;
+    background-color: #fff;
+}
+
+.tableWrapper table{
+    width: 100%;
+}
+
+
+.tableWrapper button{
+    width: 100%;
+    height: 100%;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    color: #fff;
+}
+
+.tableWrapper button:hover{
+    background-color: #0073ee;
+    border: 1px solid #0073ee;
+}
+
+.payButton{
+    width: 100%;
 }
