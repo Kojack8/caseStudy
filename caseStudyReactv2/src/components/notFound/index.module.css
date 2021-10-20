@@ -1,0 +1,34 @@
+.wrapper{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.leftImgWrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.left{
+    width:60%;
+    margin-top: 15%;
+}
+
+.rightImgWrapper{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.right{
+    width: 50%;
+    margin-top: 15%;
+}
+
+.title{
+    text-align: center;
+    font-size: xx-large;
+}
+
+.images{
+    width: 100%;
+    display: flex;
+}
